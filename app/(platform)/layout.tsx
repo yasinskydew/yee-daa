@@ -11,7 +11,7 @@ export default function PlatformLayout({
       <aside className="hidden md:block">
         <SideNav />
       </aside>
-      <main>{children}</main>
+      <div>{children}</div>
       <div className="md:hidden">
         <SideNav />
       </div>
