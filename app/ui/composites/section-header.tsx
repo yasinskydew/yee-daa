@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import Button from "./button";
-import { ArrowRightIcon } from "./icons/arrow-right";
+import Button from "@/app/ui/primitives/button";
+import { ArrowRightIcon } from "@/app/ui/icons/arrow-right";
 
 type SectionHeaderProps = {
   title: string;

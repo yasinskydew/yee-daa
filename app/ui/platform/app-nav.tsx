@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
-import NavItem from '@/app/ui/nav-item'
+import NavItem from '@/app/ui/primitives/nav-item'
 
 export const APP_NAV_LINKS = [
   { label: 'Главная', href: '/home' },

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
-import Avatar from "./avatar";
+import Avatar from "@/app/ui/primitives/avatar";
 
 type AuthorCardProps = {
   name: string;

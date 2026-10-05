@@ -131,6 +131,7 @@ https://nextjs.org/docs/app/api-reference/components/font
 - [x] Компоненты используют токены, а не разрозненные цвета
 
 **Summary.**
+- Структура UI: `app/ui/primitives/` (атомы) + `app/ui/composites/` (продуктовые) + `icons/` + shell-меню.
 - Атомы: `Button` (primary/secondary/ghost, `href`→Link), `Badge`, `Avatar`, `NavItem` — variants + токены.
 - Продуктовые: `RecipeCard` (vertical/horizontal), `SectionHeader` (optional action), `AuthorCard` (+ `Avatar`).
 - Навигация: меню приложения вынесено в `AppNav` (не SideNav); layout только слоты aside / bottom; `usePathname` только в client-меню.

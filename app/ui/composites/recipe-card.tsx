@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import Badge from '@/app/ui/badge'
+import Badge from '@/app/ui/primitives/badge'
 import { BookmarkHeartIcon } from '@/app/ui/icons/bookmark-heart'
 import { CategoryIcon, type CategoryIconName } from '@/app/ui/icons'
 

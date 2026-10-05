@@ -1,5 +1,5 @@
-import AuthorCard from "@/app/ui/author-card";
-import SectionHeader from "@/app/ui/section-header";
+import AuthorCard from "@/app/ui/composites/author-card";
+import SectionHeader from "@/app/ui/composites/section-header";
 
 export default function HomePage() {
   return (

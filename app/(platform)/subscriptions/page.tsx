@@ -1,7 +1,7 @@
-import Badge from '@/app/ui/badge'
-import Button from '@/app/ui/button'
+import Badge from '@/app/ui/primitives/badge'
+import Button from '@/app/ui/primitives/button'
 import { CategoryIcon } from '@/app/ui/icons'
-import RecipeCard from '@/app/ui/recipe-card'
+import RecipeCard from '@/app/ui/composites/recipe-card'
 import clsx from 'clsx'
 
 export default function SubscriptionsPage() {
