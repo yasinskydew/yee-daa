@@ -7,7 +7,7 @@ import { getCategories } from '@/app/data/categories'
 const USER_NOTIFICATIONS = {
   saved: 185,
   users: 589,
-  likes: 578,
+  likes: 587,
 } as const
 
 export default function PlatformLayout({
@@ -19,7 +19,7 @@ export default function PlatformLayout({
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <Header notifications={USER_NOTIFICATIONS} />
+      <Header notifications={USER_NOTIFICATIONS} categories={categories} />
 
       <div className="flex min-h-0 flex-1">
         <aside className="hidden w-64 shrink-0 flex-col overflow-y-auto md:flex">
@@ -28,8 +28,11 @@ export default function PlatformLayout({
 
         <main className="min-w-0 flex-1 pb-20 md:pb-0">{children}</main>
 
-        <aside className="hidden w-20 shrink-0 flex-col items-center pt-4 md:flex">
-          <UserNotifications {...USER_NOTIFICATIONS} />
+        <aside className="hidden w-[208px] shrink-0 md:block">
+          <UserNotifications
+            {...USER_NOTIFICATIONS}
+            orientation="vertical"
+          />
         </aside>
       </div>
 

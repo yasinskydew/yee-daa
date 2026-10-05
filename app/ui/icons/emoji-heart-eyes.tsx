@@ -2,16 +2,22 @@ import clsx from 'clsx'
 
 type IconProps = {
   className?: string
+  /** sm = 12px (default), lg = 16px */
+  size?: 'sm' | 'lg'
 }
 
 /** Emoji heart-eyes from Figma (BsEmojiHeartEyes). */
-export function EmojiHeartEyesIcon({ className }: IconProps) {
+export function EmojiHeartEyesIcon({ className, size = 'sm' }: IconProps) {
   return (
     <svg
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={clsx('size-4 shrink-0', className)}
+      className={clsx(
+        'shrink-0 text-foreground',
+        size === 'lg' ? 'size-4' : 'size-3',
+        className,
+      )}
       aria-hidden
     >
       <path

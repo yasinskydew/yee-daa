@@ -1,18 +1,28 @@
 import type { ReactNode } from 'react'
+import clsx from 'clsx'
 
 export type NotificationCardProps = {
   count: number
   icon: ReactNode
+  className?: string
 }
 
 export default function NotificationCard({
   count,
   icon,
+  className,
 }: NotificationCardProps) {
   return (
-    <div className="flex items-center justify-center gap-1 px-2 py-1 md:px-1 md:py-2">
+    <div
+      className={clsx(
+        'flex items-center gap-2',
+        className,
+      )}
+    >
       {icon}
-      <span className="text-sm font-bold text-primary-strong">{count}</span>
+      <span className="text-base font-medium leading-none text-primary-strong">
+        {count}
+      </span>
     </div>
   )
 }
