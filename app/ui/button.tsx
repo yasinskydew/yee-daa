@@ -1,8 +1,10 @@
 import clsx from "clsx";
+import Link from "next/link";
 
 type ButtonProps = {
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md";
+  href?: string
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   children: React.ReactNode;
@@ -11,28 +13,38 @@ type ButtonProps = {
 export default function Button({
   variant = "primary",
   size = "md",
+  href,
   className,
   leftIcon,
   rightIcon,
   children,
   ...props
 }: ButtonProps) {
+  const classes = clsx(
+    'inline-flex items-center justify-center gap-2 font-semibold transition-opacity',
+    size === 'sm' && 'h-10 px-4 text-sm rounded-[var(--radius-md)]',
+    size === 'md' && 'h-12 px-6 text-lg rounded-[var(--radius-md)]',
+    variant === 'primary' && 'bg-primary text-primary-foreground',
+    variant === 'secondary' && 'bg-foreground text-background',
+    variant === 'ghost' && 'bg-transparent text-foreground border border-border',
+    className,
+  )
+
+  if(href) {
+    return (
+      <Link href={href} className={classes} {...(props as object)}>
+        {leftIcon}
+        {children}
+        {rightIcon}
+      </Link>
+    )
+  }
+
   return (
     <button
       type="button"
-      className={clsx(
-        "inline-flex items-center justify-center gap-2 font-semibold transition-opacity",
-        "disabled:opacity-50 disabled:pointer-events-none",
-        size === "sm" && "h-10 px-4 text-sm rounded-[var(--radius-md)]",
-        size === "md" && "h-12 px-6 text-lg rounded-[var(--radius-md)]",
-        // variant — только токены
-        variant === "primary" && "bg-primary text-primary-foreground",
-        variant === "secondary" && "bg-foreground text-background",
-        variant === "ghost" &&
-          "bg-transparent text-foreground border border-border",
-        className,
-      )}
-      {...props}
+      className={classes}
+      {...props as React.ButtonHTMLAttributes<HTMLButtonElement>}
     >
       {leftIcon}
       {children}

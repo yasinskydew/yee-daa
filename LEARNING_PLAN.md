@@ -456,6 +456,21 @@ https://nextjs.org/docs/app/api-reference/cli/next
 | Badge с `h-10` как у Button | Чип становится «кнопкой» по высоте | Высота по контенту: `px`/`py`, без фиксированного `h-*` (если макет не требует) |
 | Зашивать ширину кнопки под один фрейм Figma (`w-[197px]`) | Ломается на другом тексте/языке | В UI-kit: высота + padding; ширину (`w-full` / `flex-1`) — с места вызова |
 
+### SectionHeader / Button-as-Link / иконки
+
+| Ошибка | Почему плохо | Как правильно |
+|---|---|---|
+| `action.href` в props, но рендер `<button>` без ссылки | CTA секции не навигирует | `Button` с `href` → `Link`, или настоящий `asChild` + `<Link>` |
+| `asChild` + `href` в одном API без Slot | Это не Radix-asChild; путаница в типах | Либо `href?: string` → Link, либо `asChild` + `@radix-ui/react-slot` |
+| `import { Url } from "url"` для href | Node `Url`, не путь Next | `href?: string` |
+| `asChild: boolean` обязательный | Ломает все `<Button>` без пропа | `asChild?: boolean` / не смешивать с href-режимом |
+| Дублировать `className` у `button` и `Link` | Расхождения стилей | Одна переменная `classes = clsx(...)` |
+| `'text-foreground, font-medium'` (запятая в строке) | Класс с запятой не существует | `'text-foreground font-medium'` |
+| `leadming-8`, `xl:text:5xl` | Опечатки → стили не применяются | `leading-8`, `xl:text-5xl` |
+| Скопировать `path` из другой иконки (bookmark → arrow) | Неверная графика | Брать `d` из своего SVG (`bs-arrow-right.svg`) |
+| `fill="black"` в React-иконке | Не следует за темой/кнопкой | `fill="currentColor"` |
+| SVG в Cursor открыт как превью | Не видно `path` | Open With… → Text Editor |
+
 ### Паттерн «не повторять»
 
 1. Сверил Figma → токен уже есть? используй; нет и reused → в `globals.css`.
