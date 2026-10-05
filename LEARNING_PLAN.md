@@ -13,7 +13,8 @@
 1. **Что сделать** — в контексте приложения и дизайна  
 2. **Практическое задание** — конкретный deliverable  
 3. **Критерии приёмки** — как понять, что пункт закрыт  
-4. **Документация Next** — опорные ссылки  
+4. **Summary** — краткий итог после приёмки (что сделано / вынесено)  
+5. Опорные ссылки — в общем разделе [Useful links](#useful-links)
 
 ## Итоговый продукт (Definition of Done)
 
@@ -124,14 +125,20 @@ https://nextjs.org/docs/app/api-reference/components/font
 4. Запретить «одноразовую» разметку карточки вне `RecipeCard` на следующих экранах
 
 **Критерии приёмки.**
-- [ ] Есть Button primary/secondary (или эквивалент из макета)
-- [ ] `RecipeCard` принимает данные через props и совпадает со структурой карточки в Figma
-- [ ] Nav-элементы переиспользуются в sidebar
-- [ ] Компоненты используют токены, а не разрозненные цвета
+- [x] Есть Button primary/secondary (или эквивалент из макета)
+- [x] `RecipeCard` принимает данные через props и совпадает со структурой карточки в Figma
+- [x] Nav-элементы переиспользуются в shell (aside + bottom через `AppNav`)
+- [x] Компоненты используют токены, а не разрозненные цвета
 
-**Документация.**  
-https://nextjs.org/docs/app/getting-started/server-and-client-components  
-https://nextjs.org/docs/app/getting-started/css
+**Summary.**
+- Атомы: `Button` (primary/secondary/ghost, `href`→Link), `Badge`, `Avatar`, `NavItem` — variants + токены.
+- Продуктовые: `RecipeCard` (vertical/horizontal), `SectionHeader` (optional action), `AuthorCard` (+ `Avatar`).
+- Навигация: меню приложения вынесено в `AppNav` (не SideNav); layout только слоты aside / bottom; `usePathname` только в client-меню.
+- Иконки UI — React + `currentColor`; category — raster через `CategoryIcon`.
+- Header (поиск/фильтры) ≠ app nav — отдельный UI на п.6.
+- Вне скоупа п.5: `/ui`-каталог (опц.), CTA «Подписаться», пиксель home.
+
+Ссылки → [Useful links](#useful-links).
 
 ---
 
@@ -490,7 +497,7 @@ bg-primary-soft + text-primary-foreground → Badge (категория)
 
 ---
 
-## Useful documentation
+## Useful links
 
 ### App Router / структура
 - https://nextjs.org/docs/app/getting-started/project-structure
@@ -500,12 +507,22 @@ bg-primary-soft + text-primary-foreground → Badge (категория)
 
 ### Server / Client
 - https://nextjs.org/docs/app/getting-started/server-and-client-components
+- https://nextjs.org/docs/app/api-reference/functions/use-pathname
 - https://dev.to/hongster85/hydration-in-reactnextjs-understand-in-3-minutes-3917
 
 ### Стили и шрифты
 - https://nextjs.org/docs/app/getting-started/css
 - https://nextjs.org/docs/app/api-reference/components/font
 - https://tailwindcss.com/docs/theme
+- https://tailwindcss.com/docs/responsive-design
+
+### UI-kit / компоненты (п.5)
+- https://nextjs.org/docs/app/api-reference/components/link
+- https://nextjs.org/docs/app/api-reference/components/image
+- https://nextjs.org/docs/app/getting-started/images-and-fonts
 
 ### Тема (light/dark)
 - https://github.com/pacocoursey/next-themes
+
+### Макет
+- https://www.figma.com/design/7m7WovEbnqKau1kpCbOkLP/?node-id=7-2
