@@ -14,11 +14,11 @@ export default function PlatformLayout({
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="flex h-20 shrink-0 items-center justify-between">
+      <header className="flex h-20 shrink-0 items-center justify-between px-4 py-6">
         <div className="flex items-center gap-4">
           <Logo size="sm" className="md:hidden" />
           <Logo size="md" className="hidden md:block" />
-          <BreadcrumbsNav className="hidden md:flex" />
+          <BreadcrumbsNav className="hidden md:flex ml-32"/>
         </div>
         <UserCard
           name="Екатерина Константинопольская"

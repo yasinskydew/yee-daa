@@ -3,6 +3,10 @@ import type { Category } from '@/app/data/types'
 
 const categories = categoriesJson as Category[]
 
+export function categoryHref(slug: string) {
+  return `/category/${slug}`
+}
+
 export function getCategories(): Category[] {
   return categories
 }
@@ -24,4 +28,26 @@ export function findCategoryByAnySlug(slug: string): {
   }
 
   return undefined
+}
+
+export function findActiveParentSlug(
+  pathname: string,
+  items: Category[] = categories,
+): string | null {
+  for (const category of items) {
+    if (pathname === categoryHref(category.slug)) return category.slug
+    if (
+      category.children.some((child) => pathname === categoryHref(child.slug))
+    ) {
+      return category.slug
+    }
+  }
+  return null
+}
+
+export function isCategoryActive(pathname: string, category: Category) {
+  if (pathname === categoryHref(category.slug)) return true
+  return category.children.some(
+    (child) => pathname === categoryHref(child.slug),
+  )
 }
