@@ -1,20 +1,23 @@
-import React from "react";
-import SideNav from "../ui/platform/sidenav";
+import AppNav from '@/app/ui/platform/app-nav'
+import { ThemeToggle } from '@/app/ui/theme-toggle'
 
 export default function PlatformLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <>
-      <aside className="hidden md:block">
-        <SideNav />
+      <aside className="hidden md:flex md:flex-col">
+        <AppNav orientation="vertical" />
+        <ThemeToggle />
       </aside>
+
       <div>{children}</div>
+
       <div className="md:hidden">
-        <SideNav />
+        <AppNav orientation="horizontal" />
       </div>
     </>
-  );
+  )
 }
