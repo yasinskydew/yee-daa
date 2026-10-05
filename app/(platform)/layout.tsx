@@ -1,9 +1,14 @@
 import AppNav from '@/app/ui/platform/app-nav'
-import BreadcrumbsNav from '@/app/ui/platform/breadcrumbs-nav'
 import CategoryNav from '@/app/ui/platform/category-nav'
-import Logo from '@/app/ui/primitives/logo'
-import UserCard from '@/app/ui/composites/user-card'
+import Header from '@/app/ui/composites/header'
+import UserNotifications from '@/app/ui/composites/notification/user-notification'
 import { getCategories } from '@/app/data/categories'
+
+const USER_NOTIFICATIONS = {
+  saved: 185,
+  users: 589,
+  likes: 578,
+} as const
 
 export default function PlatformLayout({
   children,
@@ -14,21 +19,7 @@ export default function PlatformLayout({
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="flex h-20 shrink-0 items-center justify-between px-4 py-6">
-        <div className="flex items-center gap-4">
-          <Logo size="sm" className="md:hidden" />
-          <Logo size="md" className="hidden md:block" />
-          <BreadcrumbsNav className="hidden md:flex ml-32"/>
-        </div>
-        <UserCard
-          name="Екатерина Константинопольская"
-          handle="@bake_and_pie"
-          imageSrc="/avatar-mock.jpg"
-          imageAlt="User"
-          href="#"
-          className="hidden md:block"
-        />
-      </header>
+      <Header notifications={USER_NOTIFICATIONS} />
 
       <div className="flex min-h-0 flex-1">
         <aside className="hidden w-64 shrink-0 flex-col overflow-y-auto md:flex">
@@ -36,6 +27,10 @@ export default function PlatformLayout({
         </aside>
 
         <main className="min-w-0 flex-1 pb-20 md:pb-0">{children}</main>
+
+        <aside className="hidden w-20 shrink-0 flex-col items-center pt-4 md:flex">
+          <UserNotifications {...USER_NOTIFICATIONS} />
+        </aside>
       </div>
 
       <div className="fixed inset-x-0 bottom-0 md:hidden">
