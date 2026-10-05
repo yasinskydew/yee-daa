@@ -1,3 +1,4 @@
+import AuthorCard from "@/app/ui/author-card";
 import SectionHeader from "@/app/ui/section-header";
 
 export default function HomePage() {
@@ -18,6 +19,16 @@ export default function HomePage() {
           title="Кулинарные блоги"
           action={{ label: "Все авторы", href: "/subscriptions" }}
         />
+        <div>
+          <AuthorCard 
+            name="Елена Высоцкая"
+            handle="@elenapovar"
+            description="Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку."
+            href="#"
+            imageSrc="/avatar-mock.jpg"
+            imageAlt="elenapovar"
+          />
+        </div>
       </section>
     </>
   );
