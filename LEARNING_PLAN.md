@@ -429,3 +429,68 @@ https://nextjs.org/docs/app/api-reference/cli/next
 - Прод-БД (Postgres и т.п.)
 - Реальный OAuth/NextAuth в проде
 - E2E-тесты на Playwright (желательно после стабилизации UI)
+
+---
+
+## Разбор ошибок (UI-kit / токены)
+
+Ошибки из практики пунктов 4–5. Сверяй перед приёмкой новых компонентов.
+
+### Токены и темы
+
+| Ошибка | Почему плохо | Как правильно |
+|---|---|---|
+| `--primary-foreground` только в `html.dark`, нет в `:root` | В light `text-primary-foreground` может не работать | Задавать парные токены и в light, и в dark |
+| Primary-кнопка: `text-foreground` | В dark `foreground` светлый → лайм + белый текст, плохой контраст | `text-primary-foreground` (обычно `#000` на лайме в обеих темах) |
+| Путать `foreground` и `*-foreground` | `foreground` = текст **страницы**; `primary-foreground` = текст **на** primary | Семантика: цвет поверхности + цвет контента на ней |
+| Badge с `bg-primary` как у Button | В макете чип = soft lime (`Lime/150`), не CTA | Badge primary → `bg-primary-soft` |
+
+### Компоненты и API
+
+| Ошибка | Почему плохо | Как правильно |
+|---|---|---|
+| `{...props}` внутри `clsx(...)` / `className` | `onClick`/`disabled` не попадают на DOM; className ломается | `className={clsx(...)}` отдельно, `{...props}` на элементе |
+| Тип `ButtonHTMLAttributes`, рендер `<span>` / `<div>` | Ложь в типах, лишние button-пропсы | Тип = элемент: `HTMLAttributes<HTMLSpanElement>` для Badge |
+| `disabled:*` на неинтерактивном `span` | Стили не к чему привязать | Либо не тянуть disabled, либо делать реальный `button` |
+| Имя файла `budge` / компонент `Budge` | Путаница в импортах и ревью | `badge.tsx` → `Badge` |
+| Badge с `h-10` как у Button | Чип становится «кнопкой» по высоте | Высота по контенту: `px`/`py`, без фиксированного `h-*` (если макет не требует) |
+| Зашивать ширину кнопки под один фрейм Figma (`w-[197px]`) | Ломается на другом тексте/языке | В UI-kit: высота + padding; ширину (`w-full` / `flex-1`) — с места вызова |
+
+### Паттерн «не повторять»
+
+1. Сверил Figma → токен уже есть? используй; нет и reused → в `globals.css`.
+2. Props + `clsx` (база → size → variant → `className`).
+3. Native/`HTMLAttributes` совпадают с тегом.
+4. Проверил **light и dark**.
+5. Показан хотя бы на одной странице (например `/subscriptions` или `/ui`).
+
+### Шпаргалка токенов для кнопок/чипов
+
+```txt
+bg-primary + text-primary-foreground     → Button primary
+bg-foreground + text-background          → Button secondary (или завести secondary/secondary-foreground)
+bg-transparent + border-border           → Button ghost
+bg-primary-soft + text-primary-foreground → Badge (категория)
+```
+
+---
+
+## Useful documentation
+
+### App Router / структура
+- https://nextjs.org/docs/app/getting-started/project-structure
+- https://nextjs.org/docs/app/getting-started/layouts-and-pages
+- https://nextjs.org/docs/app/api-reference/file-conventions/route-groups
+- https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes
+
+### Server / Client
+- https://nextjs.org/docs/app/getting-started/server-and-client-components
+- https://dev.to/hongster85/hydration-in-reactnextjs-understand-in-3-minutes-3917
+
+### Стили и шрифты
+- https://nextjs.org/docs/app/getting-started/css
+- https://nextjs.org/docs/app/api-reference/components/font
+- https://tailwindcss.com/docs/theme
+
+### Тема (light/dark)
+- https://github.com/pacocoursey/next-themes
