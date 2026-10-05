@@ -161,9 +161,23 @@ https://nextjs.org/docs/app/api-reference/components/font
 - [ ] Порядок секций и ключевые подписи совпадают с дизайном
 - [ ] Отклонения по отступам/кеглям в критичных местах ≤ 2px (или осознанно зафиксированы как исключения)
 
-**Документация.**  
-https://nextjs.org/docs/app/getting-started/css  
-Макет: https://www.figma.com/design/7m7WovEbnqKau1kpCbOkLP/?node-id=7-2
+**Роадмап реализации.**  
+Данные (типы/API) — п.7. На п.6 моки в `page` или локальный `home-mocks.ts`.
+
+| Фаза | Фокус | Deliverable |
+|---|---|---|
+| 0 | Shell (layout) | `aside` (~256) + `main` + sticky bottom; отступы; `AppNav` vertical/horizontal; нет гориз. скролла на 360 |
+| 1 | Каркас секций `/home` | Порядок: приветствие → Новые рецепты → Самое сочное → Кулинарные блоги → превью категории; `SectionHeader` + 1–2 мок-карточки |
+| 2 | Сетки | Новые: ряд/карусель `vertical`; Сочное: `horizontal` `grid-cols-2→1`; Блоги: `grid-cols-3→1`; gap снаружи карточек |
+| 3 | Header home | h1 «Приятного аппетита!»; `SearchInput` (можно non-functional); фильтры — заглушка; ≠ `AppNav` |
+| 4 | Пиксель | Проход 1920 → 1440 → 768 → 360; кегли/gap/размеры карточек; ≤2px или исключение в «Разбор ошибок» |
+| 5 | Полировка | dark; `href` секций на заглушки маршрутов; убрать/оставить playground на `/subscriptions` |
+
+Порядок файлов: фаза 0 → `layout` / `app-nav`; 1–2 → `home/page` + моки; 3 → primitive search; 4 → только spacing/typography.
+
+**Вне скоупа п.6:** живой поиск, API/типы (п.7), expandable категории в nav, идеальная карусель со стрелками.
+
+Ссылки → [Useful links](#useful-links).
 
 ---
 
