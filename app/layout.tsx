@@ -6,6 +6,7 @@ import ThemeProviders from "./providers/theme-provider";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      <body
+        className={`${inter.className} min-h-full flex flex-col font-medium`}
+        suppressHydrationWarning
+      >
         <ThemeProviders>{children}</ThemeProviders>
       </body>
     </html>

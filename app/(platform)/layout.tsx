@@ -32,7 +32,9 @@ export default function PlatformLayout({
           </Suspense>
         </aside>
 
-        <main className="min-w-0 flex-1 pb-20 md:pb-0">{children}</main>
+        <main className="min-w-0 flex-1 overflow-x-visible px-4 pb-20 md:pb-0 md:pl-6 md:pr-[72px]">
+          {children}
+        </main>
 
         <aside className="hidden w-[208px] shrink-0 md:block">
           <UserNotifications

@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import {
   categoryHref,
-  isCategoryActive,
   isChildCategoryActive,
   type CategoryFilter,
 } from '@/app/data/categories'
@@ -25,7 +24,6 @@ export default function CategoryNavItem({
   onToggle,
 }: CategoryNavItemProps) {
   const hasChildren = category.children.length > 0
-  const active = isCategoryActive(filter, category)
   const childrenId = `category-${category.slug}-children`
 
   return (
@@ -36,9 +34,8 @@ export default function CategoryNavItem({
         aria-controls={hasChildren ? childrenId : undefined}
         onClick={() => onToggle(category)}
         className={clsx(
-          'flex h-12 w-full items-center gap-3 px-2 text-left text-foreground transition-colors font-normal',
+          'flex h-12 w-full items-center gap-3 px-2 text-left text-foreground transition-colors',
           isOpen && 'bg-primary-soft font-bold',
-          !isOpen && active && 'font-medium',
         )}
       >
         <CategoryIcon name={category.icon} className="size-6" />
