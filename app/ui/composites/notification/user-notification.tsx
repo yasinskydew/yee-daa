@@ -55,12 +55,18 @@ export default function UserNotifications({
       className={clsx(
         isHorizontal
           ? 'flex flex-row items-center gap-4'
-          : 'flex h-[200px] w-[208px] flex-col items-center justify-center gap-6',
+          : 'flex flex-col items-center justify-center gap-6',
         className,
       )}
     >
       {items.map((card) => (
-        <NotificationCard key={card.id} count={card.count} icon={card.icon} />
+        <NotificationCard key={card.id} count={card.count} icon={card.icon}
+        className={clsx(
+          isHorizontal
+            ? 'px-2 py-1.5'
+            : 'px-4 py-3',
+        )}
+        />
       ))}
     </div>
   )

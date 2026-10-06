@@ -34,7 +34,7 @@ export default function CategoryNavItem({
         aria-controls={hasChildren ? childrenId : undefined}
         onClick={() => onToggle(category)}
         className={clsx(
-          'flex h-12 w-full items-center gap-3 rounded-[var(--radius-sm)] px-2 text-left text-foreground transition-colors',
+          'flex h-12 w-full items-center gap-3 px-2 text-left text-foreground transition-colors font-normal',
           isOpen && 'bg-primary-soft font-bold',
           !isOpen && active && 'font-medium',
         )}

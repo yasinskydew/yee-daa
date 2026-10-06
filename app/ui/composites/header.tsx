@@ -34,7 +34,7 @@ export default function Header({ notifications, categories }: HeaderProps) {
           imageSrc="/avatar-mock.jpg"
           imageAlt="User"
           href="#"
-          className="hidden md:block"
+          className="hidden md:block md:pr-16"
         />
       </div>
     </header>

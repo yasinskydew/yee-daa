@@ -32,6 +32,7 @@ export default function PlatformLayout({
           <UserNotifications
             {...USER_NOTIFICATIONS}
             orientation="vertical"
+            className='md:py-4 md:pl-2'
           />
         </aside>
       </div>

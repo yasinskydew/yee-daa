@@ -27,7 +27,7 @@ export default function UserCard({
       )}>
       <Link href={href} className="flex flex-col">
         <div className="flex items-center gap-3">
-          <Avatar name={name} imageSrc={imageSrc} imageAlt={imageAlt} className="ml-4"/>
+          <Avatar name={name} imageSrc={imageSrc} imageAlt={imageAlt}/>
           <div className="min-w-0">
             <p className="text-lg font-medium leading-7 text-foreground">
               {name}
