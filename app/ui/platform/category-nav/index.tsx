@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import clsx from 'clsx'
-import type { Category } from '@/app/data/types'
-import CategoryNavItem from '@/app/ui/platform/category-nav/category-nav-item'
-import { useCategoryNav } from '@/app/ui/platform/category-nav/use-category-nav'
+import clsx from "clsx";
+import type { Category } from "@/app/data/types";
+import CategoryNavItem from "@/app/ui/platform/category-nav/category-nav-item";
+import { useCategoryNav } from "@/app/ui/platform/category-nav/use-category-nav";
 
 type CategoryNavProps = {
-  categories: Category[]
-  className?: string
-}
+  categories: Category[];
+  className?: string;
+};
 
-export default function CategoryNav({ categories, className }: CategoryNavProps) {
-  const { openSlug, pathname, toggle } = useCategoryNav(categories)
+export default function CategoryNav({
+  categories,
+  className,
+}: CategoryNavProps) {
+  const { openSlug, pathname, toggle } = useCategoryNav(categories);
 
   return (
     <nav
       aria-label="Категории"
-      className={clsx(
-        'flex w-full flex-col',
-        className)
-      }
+      className={clsx('flex w-full flex-col', className)}
     >
       {categories.map((category) => (
         <CategoryNavItem
@@ -31,5 +31,5 @@ export default function CategoryNav({ categories, className }: CategoryNavProps)
         />
       ))}
     </nav>
-  )
+  );
 }
