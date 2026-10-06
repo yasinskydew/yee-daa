@@ -22,8 +22,8 @@ export default function PlatformLayout({
       <Header notifications={USER_NOTIFICATIONS} categories={categories} />
 
       <div className="flex min-h-0 flex-1">
-        <aside className="hidden w-64 shrink-0 flex-col overflow-y-auto md:flex">
-          <CategoryNav categories={categories} />
+        <aside className="hidden w-64 shrink-0 flex-col overflow-y-auto md:flex py-6">
+          <CategoryNav categories={categories} className='py-[10px] pl-[10px] pr-4'/>
         </aside>
 
         <main className="min-w-0 flex-1 pb-20 md:pb-0">{children}</main>

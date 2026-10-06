@@ -16,7 +16,10 @@ export default function CategoryNav({ categories, className }: CategoryNavProps)
   return (
     <nav
       aria-label="Категории"
-      className={clsx('flex w-full flex-col', className)}
+      className={clsx(
+        'flex w-full flex-col',
+        className)
+      }
     >
       {categories.map((category) => (
         <CategoryNavItem
