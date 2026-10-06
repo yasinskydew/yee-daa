@@ -4,6 +4,7 @@ import CategoryNav from '@/app/ui/platform/category-nav'
 import Header from '@/app/ui/composites/header'
 import UserNotifications from '@/app/ui/composites/notification/user-notification'
 import { getCategories } from '@/app/data/categories'
+import FooterLeft from '../ui/composites/footer-left'
 
 const USER_NOTIFICATIONS = {
   saved: 185,
@@ -23,13 +24,14 @@ export default function PlatformLayout({
       <Header notifications={USER_NOTIFICATIONS} categories={categories} />
 
       <div className="flex min-h-0 flex-1">
-        <aside className="hidden w-64 shrink-0 flex-col overflow-y-auto md:flex py-6">
+        <aside className="hidden h-full min-h-0 w-64 shrink-0 flex-col overflow-y-auto py-6 md:flex">
           <Suspense fallback={null}>
             <CategoryNav
               categories={categories}
               className="py-[10px] pl-[10px] pr-4"
             />
           </Suspense>
+          <FooterLeft className='px-6'/>
         </aside>
 
         <main className="min-w-0 flex-1 overflow-x-visible px-4 pb-20 md:pb-0 md:pl-6 md:pr-[72px]">
