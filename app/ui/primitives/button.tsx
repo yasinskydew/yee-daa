@@ -21,7 +21,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const classes = clsx(
-    'inline-flex items-center justify-center gap-2 font-semibold transition-opacity',
+    'inline-flex items-center justify-center gap-2 font-semibold transition-opacity cursor-pointer',
     size === 'sm' && 'h-10 px-4 text-sm rounded-[var(--radius-md)]',
     size === 'md' && 'h-12 px-6 text-lg rounded-[var(--radius-md)]',
     size === 'none' && 'p-0',

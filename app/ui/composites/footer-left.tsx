@@ -11,7 +11,7 @@ export default function FooterLeft({
 }: FooterLeftProps) {
   return (
     <footer className={clsx(
-      "mt-auto flex flex-col items-start gap-4 px-2 pt-8",
+      "flex shrink-0 flex-col items-start gap-4 px-2 pt-8",
       className,
     )}>
       <p className="text-sm leading-5 text-muted">Версия программы 03.25</p>

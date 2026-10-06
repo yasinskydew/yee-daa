@@ -20,21 +20,23 @@ export default function PlatformLayout({
   const categories = getCategories()
 
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className="flex h-dvh flex-col overflow-hidden">
       <Header notifications={USER_NOTIFICATIONS} categories={categories} />
 
-      <div className="flex min-h-0 flex-1">
-        <aside className="hidden h-full min-h-0 w-64 shrink-0 flex-col overflow-y-auto py-6 md:flex">
-          <Suspense fallback={null}>
-            <CategoryNav
-              categories={categories}
-              className="py-[10px] pl-[10px] pr-4"
-            />
-          </Suspense>
-          <FooterLeft className='px-6'/>
+      <div className="flex min-h-0 flex-1 overflow-hidden">
+        <aside className="hidden min-h-0 w-64 shrink-0 flex-col overflow-hidden py-6 md:flex">
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <Suspense fallback={null}>
+              <CategoryNav
+                categories={categories}
+                className="py-[10px] pl-[10px] pr-4"
+              />
+            </Suspense>
+          </div>
+          <FooterLeft className="px-6" />
         </aside>
 
-        <main className="min-w-0 flex-1 overflow-x-visible px-4 pb-20 md:pb-0 md:pl-6 md:pr-[72px]">
+        <main className="min-h-0 min-w-0 flex-1 overflow-x-visible overflow-y-auto px-4 pb-20 md:pb-0 md:pl-6 md:pr-[72px]">
           {children}
         </main>
 

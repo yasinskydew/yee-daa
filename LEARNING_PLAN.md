@@ -175,7 +175,61 @@ https://nextjs.org/docs/app/api-reference/components/font
 
 Порядок файлов: фаза 0 → `layout` / `app-nav`; 1–2 → `home/page` + моки; 3 → primitive search; 4 → только spacing/typography.
 
-**Вне скоупа п.6:** живой поиск, API/типы (п.7), expandable категории в nav, идеальная карусель со стрелками.
+**Вне скоупа п.6:** живой поиск, API/типы (п.7), идеальная карусель со стрелками.
+
+### Shell: независимый scroll (CategoryNav ≠ FooterLeft)
+
+Макет: при раскрытии accordion список категорий **скроллится внутри колонки**, блок версии / копирайта / «Выйти» (`FooterLeft`) **остаётся внизу** и не уезжает вместе с пунктами. То же в desktop `aside` и в mobile drawer.
+
+#### Почему ломается
+
+Flex-элемент по умолчанию имеет `min-height: auto` = высота контента. Accordion раскрылся → `aside` вырос → страница стала выше → футер уехал вниз, скроллится **всё окно**, а не nav.
+
+`overflow-y-auto` на родителе **вместе** с nav и footer тоже плохо: футер уходит в ту же прокрутку.
+
+`flex-1` на nav **не работает**, пока у колонки нет **ограниченной высоты** (не `min-h-dvh`, а `h-dvh` / высота флекс-ребёнка с `min-h-0`).
+
+#### Правильная схема (три слоя)
+
+```
+shell          h-dvh flex-col overflow-hidden     ← высота = viewport, наружу не растём
+  Header       shrink-0
+  body row     flex-1 min-h-0 overflow-hidden     ← забирает остаток экрана
+    aside      flex-col min-h-0 overflow-hidden w-64
+      nav wrap flex-1 min-h-0 overflow-y-auto     ← ЕДИНСТВЕННЫЙ вертикальный scroll меню
+        CategoryNav
+      FooterLeft  shrink-0                       ← всегда виден
+    main       flex-1 min-h-0 overflow-y-auto    ← скролл контента страницы отдельно
+```
+
+Классы-якоря:
+
+| Слой | Обязательные классы | Зачем |
+|---|---|---|
+| shell | `h-dvh overflow-hidden` | не `min-h-dvh`: иначе колонка растёт с accordion |
+| ряд body | `flex-1 min-h-0 overflow-hidden` | `min-h-0` снимает `min-height: auto` |
+| aside | `flex flex-col min-h-0 overflow-hidden` | высота = ряд, дети делят её |
+| обёртка nav | `flex-1 min-h-0 overflow-y-auto` | скролл **только** категорий |
+| FooterLeft | `shrink-0` (не класть в overflow-y-auto aside) | прибит к низу колонки |
+| main | `flex-1 min-h-0 overflow-y-auto` | длинная главная не двигает сайдбар |
+
+`overflow-y-auto` вешать **не** на `aside` целиком и **не** на `CategoryNav` как единственный flex-ребёнок без обёртки: `Suspense` — промежуточный узел, `flex-1` должен быть на обёртке-ребёнке `aside`.
+
+#### Mobile drawer (`MobileMenu`)
+
+Та же нарезка внутри панели (`overflow-hidden` + колонка):
+
+1. header (`bg-header` + Logo) — `shrink-0`  
+2. обёртка `CategoryNav` — `flex-1 min-h-0 overflow-y-auto`  
+3. `FooterLeft` — `shrink-0`  
+
+Backdrop / `fixed inset-0` задаёт высоту панели (`inset-y-0`). Скролл появляется, когда раскрытый accordion не влезает между шапкой и футером.
+
+#### Чеклист
+
+- [ ] Раскрытие «Заготовки» / «Веганская кухня» → скроллбар у списка, футер на месте  
+- [ ] Страница `/home` скроллится в `main`, сайдбар не едет  
+- [ ] Mobile burger: то же поведение внутри drawer  
 
 Ссылки → [Useful links](#useful-links).
 
@@ -478,6 +532,16 @@ https://nextjs.org/docs/app/api-reference/cli/next
 | Имя файла `budge` / компонент `Budge` | Путаница в импортах и ревью | `badge.tsx` → `Badge` |
 | Badge с `h-10` как у Button | Чип становится «кнопкой» по высоте | Высота по контенту: `px`/`py`, без фиксированного `h-*` (если макет не требует) |
 | Зашивать ширину кнопки под один фрейм Figma (`w-[197px]`) | Ломается на другом тексте/языке | В UI-kit: высота + padding; ширину (`w-full` / `flex-1`) — с места вызова |
+
+### Shell / scroll
+
+| Ошибка | Почему плохо | Как правильно |
+|---|---|---|
+| `overflow-y-auto` на всём `aside` (nav + footer) | Футер уезжает в скролл вместе с accordion | Скролл только на обёртке `CategoryNav`; `FooterLeft` — сосед `shrink-0` |
+| `min-h-dvh` на shell без `h-dvh` / `overflow-hidden` | Колонка растёт с контентом (`min-height: auto`) | `h-dvh overflow-hidden` на корне layout |
+| `flex-1` без `min-h-0` | Flex-ребёнок не сжимается ниже контента, inner scroll не включается | Пара: `flex-1 min-h-0 overflow-y-auto` |
+| `flex-1` на `CategoryNav` внутри `<Suspense>` | Flex-ребёнок aside = Suspense, не nav | Обёртка-div вокруг Suspense+nav |
+| `mt-auto` на футере при растущем aside | Футер «прибивается» к низу **контента**, не viewport | Сначала ограничить высоту aside, потом `shrink-0` |
 
 ### SectionHeader / Button-as-Link / иконки
 

@@ -4,7 +4,9 @@ import { Suspense, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import type { Category } from '@/app/data/types'
 import { BurgerIcon } from '@/app/ui/icons'
+import Logo from '@/app/ui/primitives/logo'
 import CategoryNav from '@/app/ui/platform/category-nav'
+import FooterLeft from '@/app/ui/composites/footer-left'
 
 type MobileMenuProps = {
   categories: Category[]
@@ -53,21 +55,20 @@ export default function MobileMenu({ categories, className }: MobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-label="Категории"
-            className="absolute inset-y-0 right-0 flex w-[min(100%,20rem)] flex-col overflow-y-auto bg-background shadow-elevation-1"
+            className="absolute inset-y-0 left-0 flex w-[min(100%,20rem)] flex-col overflow-hidden rounded-r-lg bg-background shadow-elevation-1"
           >
-            <div className="flex h-20 items-center justify-end px-4">
-              <button
-                type="button"
-                aria-label="Закрыть меню"
-                onClick={() => setOpen(false)}
-                className="flex size-10 items-center justify-center text-foreground"
-              >
-                <BurgerIcon />
-              </button>
+            <header className="flex h-20 shrink-0 items-center bg-header px-4">
+              <Logo size="md" />
+            </header>
+            <div className="min-h-0 flex-1 overflow-y-auto">
+              <Suspense fallback={null}>
+                <CategoryNav
+                  categories={categories}
+                  className="px-3 py-2"
+                />
+              </Suspense>
             </div>
-            <Suspense fallback={null}>
-              <CategoryNav categories={categories} />
-            </Suspense>
+            <FooterLeft className="px-6 pb-6" />
           </div>
         </div>
       )}
