@@ -22,7 +22,7 @@ export default function Header({ notifications, categories }: HeaderProps) {
           <Logo size="md" className="hidden md:block" />
         </div>
         <Suspense fallback={null}>
-          <BreadcrumbsNav className="hidden min-w-0 flex-1 md:flex" />
+          <BreadcrumbsNav className="hidden min-w-0 flex-1 md:flex md:px-[7px]" />
         </Suspense>
       </div>
 
