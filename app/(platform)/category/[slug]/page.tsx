@@ -1,10 +1,15 @@
-export default async function CategoryPage (props: { params: Promise<{ slug: string }>}) {
-    const params = await props.params;
-    const slug = params.slug;
+import { redirect } from 'next/navigation'
+import {
+  categoryHref,
+  findCategoryByAnySlug,
+} from '@/app/data/categories'
 
-    return (
-        <main>
-            Category slug {slug}
-        </main>
-    )
+export default async function CategoryRedirectPage(props: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await props.params
+  const found = findCategoryByAnySlug(slug)
+
+  if (!found) redirect('/home')
+  redirect(categoryHref(found.category.slug, found.childSlug))
 }

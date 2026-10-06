@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import Logo from '@/app/ui/primitives/logo'
 import UserCard from '@/app/ui/composites/user-card'
 import BreadcrumbsNav from '@/app/ui/platform/breadcrumbs-nav'
@@ -14,11 +15,15 @@ type HeaderProps = {
 
 export default function Header({ notifications, categories }: HeaderProps) {
   return (
-    <header className="flex h-20 shrink-0 items-center justify-between bg-header px-2 md:px-4">
-      <div className="flex min-w-0 items-center gap-4 md:gap-8">
-        <Logo size="sm" className="md:hidden" />
-        <Logo size="md" className="hidden md:block" />
-        <BreadcrumbsNav className="hidden md:flex" />
+    <header className="flex h-20 shrink-0 items-center justify-between bg-header px-2 sm:px-4">
+      <div className="flex min-w-0 flex-1 items-center">
+        <div className="flex shrink-0 items-center md:w-64">
+          <Logo size="sm" className="md:hidden" />
+          <Logo size="md" className="hidden md:block" />
+        </div>
+        <Suspense fallback={null}>
+          <BreadcrumbsNav className="hidden min-w-0 flex-1 md:flex" />
+        </Suspense>
       </div>
 
       <div className="flex items-center gap-4 md:gap-0">

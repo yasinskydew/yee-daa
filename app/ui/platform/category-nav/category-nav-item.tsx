@@ -5,6 +5,8 @@ import Link from 'next/link'
 import {
   categoryHref,
   isCategoryActive,
+  isChildCategoryActive,
+  type CategoryFilter,
 } from '@/app/data/categories'
 import type { Category } from '@/app/data/types'
 import { CategoryIcon, ChevronDownIcon } from '@/app/ui/icons'
@@ -12,18 +14,18 @@ import { CategoryIcon, ChevronDownIcon } from '@/app/ui/icons'
 type CategoryNavItemProps = {
   category: Category
   isOpen: boolean
-  pathname: string
+  filter: CategoryFilter
   onToggle: (category: Category) => void
 }
 
 export default function CategoryNavItem({
   category,
   isOpen,
-  pathname,
+  filter,
   onToggle,
 }: CategoryNavItemProps) {
   const hasChildren = category.children.length > 0
-  const active = isCategoryActive(pathname, category)
+  const active = isCategoryActive(filter, category)
   const childrenId = `category-${category.slug}-children`
 
   return (
@@ -52,13 +54,14 @@ export default function CategoryNavItem({
       </button>
 
       {isOpen && hasChildren && (
-        <ul
-          id={childrenId}
-          className="ml-10 flex flex-col py-1"
-        >
+        <ul id={childrenId} className="ml-10 flex flex-col py-1">
           {category.children.map((child) => {
-            const href = categoryHref(child.slug)
-            const isActive = pathname === href
+            const href = categoryHref(category.slug, child.slug)
+            const isActive = isChildCategoryActive(
+              filter,
+              category.slug,
+              child.slug,
+            )
 
             return (
               <li key={child.slug}>

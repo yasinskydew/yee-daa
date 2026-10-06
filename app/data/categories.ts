@@ -3,8 +3,15 @@ import type { Category } from '@/app/data/types'
 
 const categories = categoriesJson as Category[]
 
-export function categoryHref(slug: string) {
-  return `/category/${slug}`
+export type CategoryFilter = {
+  cat?: string | null
+  sub?: string | null
+}
+
+export function categoryHref(cat: string, sub?: string) {
+  const params = new URLSearchParams({ cat })
+  if (sub) params.set('sub', sub)
+  return `/home?${params.toString()}`
 }
 
 export function getCategories(): Category[] {
@@ -30,24 +37,33 @@ export function findCategoryByAnySlug(slug: string): {
   return undefined
 }
 
-export function findActiveParentSlug(
-  pathname: string,
-  items: Category[] = categories,
-): string | null {
-  for (const category of items) {
-    if (pathname === categoryHref(category.slug)) return category.slug
-    if (
-      category.children.some((child) => pathname === categoryHref(child.slug))
-    ) {
-      return category.slug
-    }
+export function parseCategoryFilter(
+  params: Pick<CategoryFilter, 'cat' | 'sub'>,
+): CategoryFilter {
+  return {
+    cat: params.cat || null,
+    sub: params.sub || null,
   }
-  return null
 }
 
-export function isCategoryActive(pathname: string, category: Category) {
-  if (pathname === categoryHref(category.slug)) return true
-  return category.children.some(
-    (child) => pathname === categoryHref(child.slug),
-  )
+export function findActiveParentSlug(
+  filter: CategoryFilter,
+  items: Category[] = categories,
+): string | null {
+  if (!filter.cat) return null
+  return items.some((category) => category.slug === filter.cat)
+    ? filter.cat
+    : null
+}
+
+export function isCategoryActive(filter: CategoryFilter, category: Category) {
+  return filter.cat === category.slug
+}
+
+export function isChildCategoryActive(
+  filter: CategoryFilter,
+  parentSlug: string,
+  childSlug: string,
+) {
+  return filter.cat === parentSlug && filter.sub === childSlug
 }

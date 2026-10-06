@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import type { Category } from '@/app/data/types'
 import { BurgerIcon } from '@/app/ui/icons'
@@ -65,7 +65,9 @@ export default function MobileMenu({ categories, className }: MobileMenuProps) {
                 <BurgerIcon />
               </button>
             </div>
-            <CategoryNav categories={categories} />
+            <Suspense fallback={null}>
+              <CategoryNav categories={categories} />
+            </Suspense>
           </div>
         </div>
       )}

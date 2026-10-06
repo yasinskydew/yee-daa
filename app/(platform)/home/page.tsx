@@ -1,10 +1,19 @@
-import AuthorCard from "@/app/ui/composites/author-card";
-import SectionHeader from "@/app/ui/composites/section-header";
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ cat?: string; sub?: string }>
+}) {
+  const { cat, sub } = await searchParams
 
-export default function HomePage() {
   return (
     <>
-      <h1 className="">Главная</h1>
+      <h1>Приятного аппетита!</h1>
+      {(cat || sub) && (
+        <p className="text-muted">
+          {cat}
+          {sub ? ` / ${sub}` : ''}
+        </p>
+      )}
     </>
-  );
+  )
 }
