@@ -14,7 +14,7 @@ type HeaderProps = {
 
 export default function Header({ notifications, categories }: HeaderProps) {
   return (
-    <header className="flex h-20 shrink-0 items-center justify-between bg-header px-4 md:px-6">
+    <header className="flex h-20 shrink-0 items-center justify-between bg-header px-2 md:px-4">
       <div className="flex min-w-0 items-center gap-4 md:gap-8">
         <Logo size="sm" className="md:hidden" />
         <Logo size="md" className="hidden md:block" />
