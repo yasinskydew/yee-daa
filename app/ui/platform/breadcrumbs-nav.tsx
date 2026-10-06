@@ -13,6 +13,7 @@ const PAGE_LABELS: Record<string, string> = {
   subscriptions: 'Подписки',
   profile: 'Профиль',
   recipes: 'Рецепты',
+  new: 'Записать рецепт',
   blogs: 'Блоги',
 }
 

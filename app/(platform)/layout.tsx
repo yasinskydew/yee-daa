@@ -4,7 +4,8 @@ import CategoryNav from '@/app/ui/platform/category-nav'
 import Header from '@/app/ui/composites/header'
 import UserNotifications from '@/app/ui/composites/notification/user-notification'
 import { getCategories } from '@/app/data/categories'
-import FooterLeft from '../ui/composites/footer-left'
+import FooterLeft from '@/app/ui/composites/footer-left'
+import WriteRecipeCta from '@/app/ui/composites/write-recipe-cta'
 
 const USER_NOTIFICATIONS = {
   saved: 185,
@@ -40,12 +41,13 @@ export default function PlatformLayout({
           {children}
         </main>
 
-        <aside className="hidden w-[208px] shrink-0 md:block">
+        <aside className="hidden w-[208px] shrink-0 flex-col items-center md:flex">
           <UserNotifications
             {...USER_NOTIFICATIONS}
             orientation="vertical"
-            className='md:py-4 md:pl-2'
+            className="md:py-4 md:pl-2"
           />
+          <WriteRecipeCta className="mt-auto pb-10" />
         </aside>
       </div>
 

@@ -231,6 +231,18 @@ Backdrop / `fixed inset-0` задаёт высоту панели (`inset-y-0`).
 - [ ] Страница `/home` скроллится в `main`, сайдбар не едет  
 - [ ] Mobile burger: то же поведение внутри drawer  
 
+### Правый рейл: CTA «Записать рецепт»
+
+Уникальный контрол (круг + glow + подпись), **не** variant `Button`.
+
+- Файл: `app/ui/composites/write-recipe-cta.tsx`
+- Иконка: `PencilSquareIcon`, `fill="currentColor"`, цвет на круге — `text-header`
+- Круг: `rounded-full bg-primary-foreground` (чёрный в обеих темах); иконка `text-header`; свечение — `radial-gradient` с `--primary` на обёртке
+- Маршрут: `Link` на заглушку `/recipes/new` (`recipes/new` выше `recipes/[id]`)
+- Слот: правый `aside` (`w-[208px]`), под `UserNotifications`, `mt-auto`; только `md+`
+- Не смешивать со счётчиками и не расширять UI-kit Button
+- Живой create — п.14
+
 Ссылки → [Useful links](#useful-links).
 
 ---
