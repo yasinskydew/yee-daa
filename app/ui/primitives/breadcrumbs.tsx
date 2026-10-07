@@ -6,12 +6,12 @@ export type BreadcrumbItem = {
   href?: string
 }
 
-type BreadcrumbsProps = {
+interface BreadcrumbsProps {
   items: BreadcrumbItem[]
   className?: string
 }
 
-export default function Breadcrumbs({ items, className }: BreadcrumbsProps) {
+export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
   if (items.length === 0) return null
 
   return (

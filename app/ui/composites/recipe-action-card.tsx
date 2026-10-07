@@ -1,9 +1,10 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import Button from '@/app/ui/primitives/button'
+import { Button } from '@/app/ui/primitives/button'
 import { CategoryIcon, type CategoryIconName } from '@/app/ui/icons'
+import { RecipeCardShell } from '@/app/ui/composites/recipe-card-media'
 
-export type RecipeActionCardProps = {
+export interface RecipeActionCardProps {
   title: string
   href: string
   categoryIcon: CategoryIconName
@@ -11,7 +12,7 @@ export type RecipeActionCardProps = {
   className?: string
 }
 
-export default function RecipeActionCard({
+export function RecipeActionCard({
   title,
   href,
   categoryIcon,
@@ -19,13 +20,7 @@ export default function RecipeActionCard({
   className,
 }: RecipeActionCardProps) {
   return (
-    <article
-      className={clsx(
-        'w-full overflow-hidden border border-border bg-background',
-        'rounded-[var(--radius-lg)]',
-        className,
-      )}
-    >
+    <RecipeCardShell className={className}>
       <div
         className={clsx(
           'flex h-full min-w-0 items-center',
@@ -54,12 +49,12 @@ export default function RecipeActionCard({
             'h-8 shrink-0 border border-primary-strong text-primary-strong',
             'px-2 text-xs',
             'xl:px-3 xl:text-sm',
-            'rounded-[var(--radius-md)]'
+            'rounded-[var(--radius-md)]',
           )}
         >
           {actionLabel}
         </Button>
       </div>
-    </article>
+    </RecipeCardShell>
   )
 }

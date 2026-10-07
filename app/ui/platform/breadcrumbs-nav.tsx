@@ -1,7 +1,8 @@
 'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation'
-import Breadcrumbs, {
+import {
+  Breadcrumbs,
   type BreadcrumbItem,
 } from '@/app/ui/primitives/breadcrumbs'
 import { getCategoryBySlug } from '@/app/data/categories'
@@ -17,7 +18,7 @@ const PAGE_LABELS: Record<string, string> = {
   blogs: 'Блоги',
 }
 
-type BreadcrumbsNavProps = {
+interface BreadcrumbsNavProps {
   className?: string
 }
 
@@ -46,7 +47,7 @@ function homeCategoryCrumbs(cat: string | null, sub: string | null): BreadcrumbI
   return items
 }
 
-export default function BreadcrumbsNav({ className }: BreadcrumbsNavProps) {
+export function BreadcrumbsNav({ className }: BreadcrumbsNavProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const parts = pathname.split('/').filter(Boolean)

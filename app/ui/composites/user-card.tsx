@@ -1,17 +1,17 @@
-import clsx from "clsx";
-import Link from "next/link";
-import Avatar from "@/app/ui/primitives/avatar";
+import clsx from 'clsx'
+import Link from 'next/link'
+import { UserIdentity } from '@/app/ui/composites/user-identity'
 
-type UserCardProps = {
-  name: string;
-  handle: string;
-  href: string;
-  imageSrc?: string;
-  imageAlt?: string;
-  className?: string;
-};
+interface UserCardProps {
+  name: string
+  handle: string
+  href: string
+  imageSrc?: string
+  imageAlt?: string
+  className?: string
+}
 
-export default function UserCard({
+export function UserCard({
   name,
   href,
   imageSrc,
@@ -20,22 +20,24 @@ export default function UserCard({
   className,
 }: UserCardProps) {
   return (
-    <article className={clsx(
-      'w-auto overflow-hidden',
-      'rounded-[var(--radius-lg)]',
-      className
-      )}>
+    <article
+      className={clsx(
+        'w-auto overflow-hidden',
+        'rounded-[var(--radius-lg)]',
+        className,
+      )}
+    >
       <Link href={href} className="flex flex-col">
-        <div className="flex items-center gap-3">
-          <Avatar name={name} imageSrc={imageSrc} imageAlt={imageAlt}/>
-          <div className="min-w-0">
-            <p className="text-lg font-medium leading-7 text-foreground">
-              {name}
-            </p>
-            <p className="text-sm leading-5 text-muted">{handle}</p>
-          </div>
-        </div>
+        <UserIdentity
+          name={name}
+          handle={handle}
+          imageSrc={imageSrc}
+          imageAlt={imageAlt}
+          className="gap-3"
+          nameClassName="text-lg leading-7"
+          handleClassName="text-sm leading-5 text-muted"
+        />
       </Link>
     </article>
-  );
+  )
 }

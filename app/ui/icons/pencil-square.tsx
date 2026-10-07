@@ -1,8 +1,5 @@
 import clsx from 'clsx'
-
-type IconProps = {
-  className?: string
-}
+import type { IconProps } from '@/app/ui/icons/types'
 
 /** Square + pencil from Figma CTA «Записать рецепт». */
 export function PencilSquareIcon({ className }: IconProps) {

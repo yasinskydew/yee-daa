@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 
-type BadgeProps = {
+interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: "primary" | "secondary";
   leftIcon?: React.ReactNode 
   children: React.ReactNode;
-} & React.HTMLAttributes<HTMLSpanElement>;
+}
 
-export default function Badge({
+export function Badge({
   variant = 'primary',
   className,
   leftIcon,

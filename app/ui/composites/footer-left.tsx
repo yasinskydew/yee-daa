@@ -1,12 +1,12 @@
-import Button from '@/app/ui/primitives/button'
+import { Button } from '@/app/ui/primitives/button'
 import { LeftIcon } from '@/app/ui/icons/left-icon'
 import clsx from 'clsx'
 
-type FooterLeftProps = {
+interface FooterLeftProps {
   className?: string
 }
 
-export default function FooterLeft({
+export function FooterLeft({
   className
 }: FooterLeftProps) {
   return (

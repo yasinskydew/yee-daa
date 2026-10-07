@@ -5,9 +5,9 @@ import {
   EmojiHeartEyesIcon,
   PeopleFillIcon,
 } from '@/app/ui/icons'
-import NotificationCard from './notification-card'
+import { NotificationCard } from '@/app/ui/composites/notification/notification-card'
 
-export type UserNotificationsProps = {
+export interface UserNotificationsProps {
   saved: number
   likes: number
   users: number
@@ -22,7 +22,7 @@ type NotificationItem = {
   icon: ReactNode
 }
 
-export default function UserNotifications({
+export function UserNotifications({
   saved,
   likes,
   users,

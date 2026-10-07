@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import Avatar from '@/app/ui/primitives/avatar'
+import { UserIdentity } from '@/app/ui/composites/user-identity'
 
-export type AuthorCardProps = {
+export interface AuthorCardProps {
   name: string
   handle: string
   description: string
@@ -12,7 +12,7 @@ export type AuthorCardProps = {
   className?: string
 }
 
-export default function AuthorCard({
+export function AuthorCard({
   name,
   href,
   imageSrc,
@@ -30,21 +30,16 @@ export default function AuthorCard({
       )}
     >
       <Link href={href} className="flex h-full flex-col">
-        <div className="flex items-center gap-2 px-4 pt-4 pb-2 lg:gap-3 lg:px-6 lg:pt-6 lg:pb-4">
-          <Avatar
+        <div className="px-4 pt-4 pb-2 lg:px-6 lg:pt-6 lg:pb-4">
+          <UserIdentity
             name={name}
+            handle={handle}
             imageSrc={imageSrc}
             imageAlt={imageAlt}
-            className="size-8 lg:size-12"
+            avatarClassName="size-8 lg:size-12"
+            nameClassName="text-base leading-6 lg:text-lg lg:leading-7"
+            handleClassName="text-xs leading-4 font-normal text-foreground/64 lg:text-sm lg:leading-5"
           />
-          <div className="min-w-0">
-            <p className="truncate text-base font-medium leading-6 text-foreground lg:text-lg lg:leading-7">
-              {name}
-            </p>
-            <p className="truncate text-xs leading-4 font-normal text-foreground/64 lg:text-sm lg:leading-5">
-              {handle}
-            </p>
-          </div>
         </div>
         <div className="px-4 pt-2 pb-4 lg:px-6 lg:pt-3 lg:pb-5">
           <p className="line-clamp-3 max-h-[3.75rem] overflow-hidden text-sm leading-5 font-normal text-foreground">

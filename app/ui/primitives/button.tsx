@@ -1,16 +1,16 @@
 import clsx from "clsx";
 import Link from "next/link";
 
-type ButtonProps = {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost" | "outlined";
   size?: "sm" | "md" | "none";
   href?: string
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   children?: React.ReactNode;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+}
 
-export default function Button({
+export function Button({
   variant = "primary",
   size = "md",
   href,

@@ -16,13 +16,13 @@ import { ArrowRightIcon } from '@/app/ui/icons/arrow-right'
 const GAP_PX_MOBILE = 12
 const GAP_PX_DESKTOP = 24
 
-type RecipeCarouselProps = {
+interface RecipeCarouselProps {
   children: ReactNode
   className?: string
   label?: string
 }
 
-export default function RecipeCarousel({
+export function RecipeCarousel({
   children,
   className,
   label = 'Карусель рецептов',

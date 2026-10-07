@@ -1,15 +1,16 @@
 import clsx from 'clsx'
-import SectionHeader from '@/app/ui/composites/section-header'
-import RecipeCard from '@/app/ui/composites/recipe-card'
-import Button from '@/app/ui/primitives/button'
-import { ArrowRightIcon } from '@/app/ui/icons/arrow-right'
+import {
+  SectionHeader,
+  SectionMobileAction,
+} from '@/app/ui/composites/section-header'
+import { RecipeCard } from '@/app/ui/composites/recipe-card'
 import { JUICY_RECIPES } from '@/app/data/home-mocks'
 
-type JuiciestRecipesSectionProps = {
+interface JuiciestRecipesSectionProps {
   className?: string
 }
 
-export default function JuiciestRecipesSection({
+export function JuiciestRecipesSection({
   className,
 }: JuiciestRecipesSectionProps) {
   return (
@@ -40,14 +41,7 @@ export default function JuiciestRecipesSection({
         ))}
       </ul>
 
-      <Button
-        href="/juicy"
-        size="sm"
-        rightIcon={<ArrowRightIcon className="size-4" />}
-        className="mx-auto shrink-0 lg:hidden"
-      >
-        Вся подборка
-      </Button>
+      <SectionMobileAction label="Вся подборка" href="/juicy" />
     </section>
   )
 }

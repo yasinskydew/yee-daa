@@ -4,16 +4,16 @@ import { Suspense, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import type { Category } from '@/app/data/types'
 import { BurgerIcon } from '@/app/ui/icons'
-import Logo from '@/app/ui/primitives/logo'
-import CategoryNav from '@/app/ui/platform/category-nav'
-import FooterLeft from '@/app/ui/composites/footer-left'
+import { Logo } from '@/app/ui/primitives/logo'
+import { CategoryNav } from '@/app/ui/platform/category-nav'
+import { FooterLeft } from '@/app/ui/composites/footer-left'
 
-type MobileMenuProps = {
+interface MobileMenuProps {
   categories: Category[]
   className?: string
 }
 
-export default function MobileMenu({ categories, className }: MobileMenuProps) {
+export function MobileMenu({ categories, className }: MobileMenuProps) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -22,10 +22,10 @@ export default function MobileMenu({ categories, className }: MobileMenuProps) {
       if (event.key === 'Escape') setOpen(false)
     }
     document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
+    document.body.classList.add('overflow-hidden')
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
+      document.body.classList.remove('overflow-hidden')
     }
   }, [open])
 

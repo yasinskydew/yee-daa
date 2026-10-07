@@ -1,10 +1,5 @@
 import clsx from 'clsx'
-
-type IconProps = {
-  className?: string
-  /** sm = 12px (default), lg = 16px */
-  size?: 'sm' | 'lg'
-}
+import type { IconProps } from '@/app/ui/icons/types'
 
 /** Bookmark + heart from Figma (BsBookmarkHeart), 16×16 viewBox. */
 export function BookmarkHeartIcon({ className, size = 'sm' }: IconProps) {

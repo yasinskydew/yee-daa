@@ -2,15 +2,15 @@
 
 import clsx from 'clsx'
 import type { Category } from '@/app/data/types'
-import CategoryNavItem from '@/app/ui/platform/category-nav/category-nav-item'
+import { CategoryNavItem } from '@/app/ui/platform/category-nav/category-nav-item'
 import { useCategoryNav } from '@/app/ui/platform/category-nav/use-category-nav'
 
-type CategoryNavProps = {
+interface CategoryNavProps {
   categories: Category[]
   className?: string
 }
 
-export default function CategoryNav({
+export function CategoryNav({
   categories,
   className,
 }: CategoryNavProps) {

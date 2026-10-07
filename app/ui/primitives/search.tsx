@@ -3,18 +3,18 @@
 import { useState } from 'react'
 import clsx from 'clsx'
 import { ALLERGEN_OPTIONS } from '@/app/data/allergens'
-import Button from '@/app/ui/primitives/button'
-import Select from '@/app/ui/primitives/select'
-import Switch from '@/app/ui/primitives/switch'
+import { Button } from '@/app/ui/primitives/button'
+import { Select } from '@/app/ui/primitives/select'
+import { Switch } from '@/app/ui/primitives/switch'
 import { SearchIcon } from '@/app/ui/icons/search-icon'
 import { MagnifyingGlassIcon } from '@/app/ui/icons/magnifying-glass'
 
-type SearchProps = {
+interface SearchProps {
   placeholder?: string
   className?: string
 }
 
-export default function Search({
+export function Search({
   placeholder = 'Название или ингредиент...',
   className,
 }: SearchProps) {

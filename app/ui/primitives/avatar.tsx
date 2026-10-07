@@ -1,14 +1,14 @@
 import clsx from "clsx";
 import Image from "next/image";
 
-type AvatarProps = {
+interface AvatarProps {
   name: string;
   imageSrc?: string;
   imageAlt?: string;
   className?: string;
 };
 
-export default function Avatar({
+export function Avatar({
   name,
   imageSrc,
   imageAlt,

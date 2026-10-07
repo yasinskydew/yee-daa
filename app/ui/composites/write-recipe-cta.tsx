@@ -2,12 +2,12 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { PencilSquareIcon } from '@/app/ui/icons'
 
-type WriteRecipeCtaProps = {
+interface WriteRecipeCtaProps {
   href?: string
   className?: string
 }
 
-export default function WriteRecipeCta({
+export function WriteRecipeCta({
   href = '/recipes/new',
   className,
 }: WriteRecipeCtaProps) {

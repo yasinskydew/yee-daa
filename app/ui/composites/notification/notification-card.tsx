@@ -1,14 +1,14 @@
 import type { ReactNode } from 'react'
 import clsx from 'clsx'
 
-export type NotificationCardProps = {
+export interface NotificationCardProps {
   count: number
   icon: ReactNode
   size?: 'sm' | 'md'
   className?: string
 }
 
-export default function NotificationCard({
+export function NotificationCard({
   count,
   icon,
   size = 'md',

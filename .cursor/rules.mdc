@@ -1,0 +1,25 @@
+---
+description: Стандарты разработки Next.js App Router и Tailwind CSS
+globs: ["app/**/*", "components/**/*"]
+alwaysApply: true
+---
+
+# Tech Stack
+- Framework: Next.js 15+ (App Router)
+- Styling: Tailwind CSS v4
+- Language: TypeScript (Strict Mode)
+- State: React Server Components + Zustand/SWR
+- UI Lib: shadcn/ui (если используется)
+
+# Code Style
+- Компоненты: Functional, Named Exports
+- Файлы: kebab-case.tsx
+- Импорты: Absolute (@/app/ui/...)
+- Стили: Utility-first, mobile-first; тема через semantic tokens (bg-background, text-foreground) + CSS vars в html.dark — не массовые dark: классы
+- Типы: Interface > Type, Props выносить отдельно
+
+# Запрещено
+- `any` типы
+- Inline styles
+- Default exports для компонентов
+- useEffect для data fetching (используй Server Components)

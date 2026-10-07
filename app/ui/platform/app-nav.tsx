@@ -1,12 +1,11 @@
 'use client'
 
 import clsx from 'clsx'
-import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { MagnifyingGlassIcon } from '@/app/ui/icons/magnifying-glass'
 import { PencilSquareIcon } from '@/app/ui/icons/pencil-square'
-import NavItem from '@/app/ui/primitives/nav-item'
+import { NavItem } from '@/app/ui/primitives/nav-item'
 
 function HomeIcon({ className }: { className?: string }) {
   return (
@@ -35,12 +34,63 @@ export const APP_NAV_LINKS = [
   { label: 'Мой профиль', href: '/profile', id: 'profile' },
 ] as const
 
-type AppNavProps = {
+interface AppNavProps {
   orientation?: 'vertical' | 'horizontal'
   className?: string
 }
 
-export default function AppNav({
+function TabIcon({
+  id,
+  active,
+}: {
+  id: (typeof APP_NAV_LINKS)[number]['id']
+  active: boolean
+}) {
+  if (id === 'home') {
+    return (
+      <span
+        className={clsx(
+          'flex items-center justify-center rounded-full',
+          active
+            ? 'size-10 bg-foreground text-header'
+            : 'size-12 text-foreground',
+        )}
+      >
+        <HomeIcon className={active ? 'size-4' : 'size-6'} />
+      </span>
+    )
+  }
+
+  if (id === 'search') {
+    return (
+      <span className="flex size-12 items-center justify-center text-foreground">
+        <MagnifyingGlassIcon className="size-6" />
+      </span>
+    )
+  }
+
+  if (id === 'write') {
+    return (
+      <span className="flex size-12 items-center justify-center text-foreground">
+        <PencilSquareIcon className="size-6" />
+      </span>
+    )
+  }
+
+  return (
+    <span className="relative size-10 overflow-hidden rounded-full bg-muted">
+      <Image
+        src="/avatar-mock.jpg"
+        alt=""
+        fill
+        className="object-cover"
+        sizes="40px"
+      />
+    </span>
+  )
+}
+
+export function AppNav({
   orientation = 'vertical',
   className,
 }: AppNavProps) {
@@ -80,60 +130,14 @@ export default function AppNav({
             : pathname === link.href || pathname.startsWith(`${link.href}/`)
 
         return (
-          <Link
+          <NavItem
             key={link.id}
             href={link.href}
-            aria-current={active ? 'page' : undefined}
-            className={clsx(
-              'flex min-w-0 flex-1 flex-col items-center justify-end gap-1 px-1 py-2.5',
-              active &&
-                'bg-[radial-gradient(circle_at_50%_30%,var(--primary)_0%,transparent_70%)]',
-            )}
-          >
-            {link.id === 'home' ? (
-              <span
-                className={clsx(
-                  'flex items-center justify-center rounded-full',
-                  active
-                    ? 'size-10 bg-foreground text-header'
-                    : 'size-12 text-foreground',
-                )}
-              >
-                <HomeIcon className={active ? 'size-4' : 'size-6'} />
-              </span>
-            ) : null}
-            {link.id === 'search' ? (
-              <span className="flex size-12 items-center justify-center text-foreground">
-                <MagnifyingGlassIcon className="size-6" />
-              </span>
-            ) : null}
-            {link.id === 'write' ? (
-              <span className="flex size-12 items-center justify-center text-foreground">
-                <PencilSquareIcon className="size-6" />
-              </span>
-            ) : null}
-            {link.id === 'profile' ? (
-              <span className="relative size-10 overflow-hidden rounded-full bg-muted">
-                <Image
-                  src="/avatar-mock.jpg"
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="40px"
-                />
-              </span>
-            ) : null}
-            <span
-              className={clsx(
-                'w-full truncate text-center text-xs leading-4',
-                active
-                  ? 'font-medium text-foreground'
-                  : 'font-normal text-foreground/64',
-              )}
-            >
-              {link.label}
-            </span>
-          </Link>
+            label={link.label}
+            active={active}
+            variant="tab"
+            icon={<TabIcon id={link.id} active={active} />}
+          />
         )
       })}
     </nav>

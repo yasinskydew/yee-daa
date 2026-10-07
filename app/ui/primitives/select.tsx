@@ -6,13 +6,14 @@ type SelectOption = {
   label: string
 }
 
-type SelectProps = {
+interface SelectProps
+  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'children'> {
   options: readonly SelectOption[]
   placeholder?: string
   className?: string
-} & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'children'>
+}
 
-export default function Select({
+export function Select({
   options,
   placeholder = 'Выберите из списка...',
   className,

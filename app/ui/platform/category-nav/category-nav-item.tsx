@@ -10,14 +10,14 @@ import {
 import type { Category } from '@/app/data/types'
 import { CategoryIcon, ChevronDownIcon } from '@/app/ui/icons'
 
-type CategoryNavItemProps = {
+interface CategoryNavItemProps {
   category: Category
   isOpen: boolean
   filter: CategoryFilter
   onToggle: (category: Category) => void
 }
 
-export default function CategoryNavItem({
+export function CategoryNavItem({
   category,
   isOpen,
   filter,

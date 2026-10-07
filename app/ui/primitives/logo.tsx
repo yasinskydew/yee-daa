@@ -2,12 +2,12 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
-type LogoProps = {
+interface LogoProps {
   className?: string;
   size?: "sm" | "md";
 };
 
-export default function Logo({ className, size = "md" }: LogoProps) {
+export function Logo({ className, size = "md" }: LogoProps) {
   if (size === "sm") {
     return (
       <Link href="/home">

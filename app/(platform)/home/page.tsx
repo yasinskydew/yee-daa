@@ -1,8 +1,8 @@
-import Search from '@/app/ui/primitives/search'
-import NewRecipesSection from '@/app/ui/composites/new-recipes-section'
-import JuiciestRecipesSection from '@/app/ui/composites/juiciest-recipes-section'
-import CulinaryBlogsSection from '@/app/ui/composites/culinary-blogs-section'
-import VeganKitchenSection from '@/app/ui/composites/vegan-kitchen-section'
+import { Search } from '@/app/ui/primitives/search'
+import { NewRecipesSection } from '@/app/ui/composites/new-recipes-section'
+import { JuiciestRecipesSection } from '@/app/ui/composites/juiciest-recipes-section'
+import { CulinaryBlogsSection } from '@/app/ui/composites/culinary-blogs-section'
+import { VeganKitchenSection } from '@/app/ui/composites/vegan-kitchen-section'
 
 type HomePageProps = {
   searchParams: Promise<{ cat?: string; sub?: string }>

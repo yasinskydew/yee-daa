@@ -1,13 +1,13 @@
 import clsx from 'clsx'
 
-type SwitchProps = {
+interface SwitchProps {
   checked: boolean
   onChange: (checked: boolean) => void
   label: string
   className?: string
 }
 
-export default function Switch({
+export function Switch({
   checked,
   onChange,
   label,

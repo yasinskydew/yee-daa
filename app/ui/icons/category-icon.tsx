@@ -18,7 +18,7 @@ export const CATEGORY_ICONS = {
 
 export type CategoryIconName = keyof typeof CATEGORY_ICONS
 
-type CategoryIconProps = {
+interface CategoryIconProps {
   name: CategoryIconName
   /** auto = follows html.dark; dark = stronger contrast on dark surfaces */
   appearance?: 'auto' | 'light' | 'dark'

@@ -1,11 +1,11 @@
 import { Suspense } from 'react'
-import AppNav from '@/app/ui/platform/app-nav'
-import CategoryNav from '@/app/ui/platform/category-nav'
-import Header from '@/app/ui/composites/header'
-import UserNotifications from '@/app/ui/composites/notification/user-notification'
+import { AppNav } from '@/app/ui/platform/app-nav'
+import { CategoryNav } from '@/app/ui/platform/category-nav'
+import { Header } from '@/app/ui/composites/header'
+import { UserNotifications } from '@/app/ui/composites/notification/user-notification'
 import { getCategories } from '@/app/data/categories'
-import FooterLeft from '@/app/ui/composites/footer-left'
-import WriteRecipeCta from '@/app/ui/composites/write-recipe-cta'
+import { FooterLeft } from '@/app/ui/composites/footer-left'
+import { WriteRecipeCta } from '@/app/ui/composites/write-recipe-cta'
 
 const USER_NOTIFICATIONS = {
   saved: 185,

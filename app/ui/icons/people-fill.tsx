@@ -1,10 +1,5 @@
 import clsx from 'clsx'
-
-type IconProps = {
-  className?: string
-  /** sm = 12px (default), lg = 16px */
-  size?: 'sm' | 'lg'
-}
+import type { IconProps } from '@/app/ui/icons/types'
 
 /** People fill from Figma (BsPeopleFill). */
 export function PeopleFillIcon({ className, size = 'sm' }: IconProps) {

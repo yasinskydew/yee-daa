@@ -1,8 +1,5 @@
 import clsx from 'clsx'
-
-type IconProps = {
-  className?: string
-}
+import type { IconProps } from '@/app/ui/icons/types'
 
 export function ArrowDownSLineIcon({ className }: IconProps) {
   return (

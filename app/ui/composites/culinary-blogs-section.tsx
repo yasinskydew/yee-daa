@@ -1,15 +1,16 @@
 import clsx from 'clsx'
-import SectionHeader from '@/app/ui/composites/section-header'
-import AuthorCard from '@/app/ui/composites/author-card'
-import Button from '@/app/ui/primitives/button'
-import { ArrowRightIcon } from '@/app/ui/icons/arrow-right'
+import {
+  SectionHeader,
+  SectionMobileAction,
+} from '@/app/ui/composites/section-header'
+import { AuthorCard } from '@/app/ui/composites/author-card'
 import { CULINARY_BLOGS } from '@/app/data/home-mocks'
 
-type CulinaryBlogsSectionProps = {
+interface CulinaryBlogsSectionProps {
   className?: string
 }
 
-export default function CulinaryBlogsSection({
+export function CulinaryBlogsSection({
   className,
 }: CulinaryBlogsSectionProps) {
   return (
@@ -38,15 +39,11 @@ export default function CulinaryBlogsSection({
         ))}
       </ul>
 
-      <Button
+      <SectionMobileAction
+        label="Все авторы"
         href="/blogs"
         variant="outlined"
-        size="sm"
-        rightIcon={<ArrowRightIcon className="size-4" />}
-        className="mx-auto shrink-0 lg:hidden"
-      >
-        Все авторы
-      </Button>
+      />
     </section>
   )
 }
