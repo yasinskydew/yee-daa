@@ -102,7 +102,7 @@ export function RecipeCard({
             className={clsx(
               'flex min-w-0 flex-1 flex-col',
               isText
-                ? 'h-full justify-between gap-6 p-4 xl:px-6 xl:pt-6 xl:pb-5'
+                ? 'h-full justify-between gap-6 p-3 xl:px-6 xl:pt-6 xl:pb-5'
                 : 'gap-2 px-2 pt-2 pb-1 lg:gap-6 lg:p-3 xl:px-6 xl:pt-4 xl:pb-5',
             )}
           >
@@ -111,7 +111,7 @@ export function RecipeCard({
                 className={clsx(
                   'font-medium',
                   isText
-                    ? 'line-clamp-1 text-xl leading-7'
+                    ? 'line-clamp-1 text-base leading-6 lg:text-xl lg:leading-7'
                     : 'h-12 line-clamp-2 text-base leading-6 lg:h-auto lg:line-clamp-1 lg:text-lg lg:leading-7 xl:text-xl',
                 )}
               >

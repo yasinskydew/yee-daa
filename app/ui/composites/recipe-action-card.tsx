@@ -34,8 +34,8 @@ export function RecipeActionCard({
           <h3
             className={clsx(
               'truncate font-medium text-foreground',
-              'text-lg leading-7',
-              'xl:text-xl',
+              'text-base leading-6',
+              'xl:text-xl xl:leading-7',
             )}
           >
             {title}

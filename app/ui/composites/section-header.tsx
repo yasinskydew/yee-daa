@@ -45,7 +45,7 @@ export function SectionHeader({
         )}
       >
         <h2 className={clsx('min-w-0 shrink-0', titleClassName)}>{title}</h2>
-        <p className="min-w-0 text-base leading-6 font-medium break-words text-foreground/64 xl:max-w-[668px] xl:shrink-0">
+        <p className="min-w-0 text-sm leading-5 font-medium break-words text-foreground/64 lg:text-base lg:leading-6 xl:max-w-[668px] xl:shrink-0">
           {description}
         </p>
       </header>
@@ -90,9 +90,14 @@ export function SectionMobileAction({
     <Button
       href={href}
       variant={variant}
-      size={size}
+      size={size === 'sm' ? 'none' : size}
       rightIcon={<ArrowRightIcon className="size-4" />}
-      className={clsx('mx-auto shrink-0 lg:hidden', className)}
+      className={clsx(
+        'mx-auto shrink-0 lg:hidden',
+        size === 'sm' &&
+          'h-10 rounded-[var(--radius-md)] px-4 text-base font-semibold',
+        className,
+      )}
     >
       {label}
     </Button>

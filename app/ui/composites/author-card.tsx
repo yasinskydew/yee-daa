@@ -42,7 +42,7 @@ export function AuthorCard({
           />
         </div>
         <div className="px-4 pt-2 pb-4 lg:px-6 lg:pt-3 lg:pb-5">
-          <p className="line-clamp-3 max-h-[3.75rem] overflow-hidden text-sm leading-5 font-normal text-foreground">
+          <p className="line-clamp-3 h-16 overflow-hidden text-sm leading-5 font-normal text-foreground">
             {description}
           </p>
         </div>

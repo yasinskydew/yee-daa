@@ -101,7 +101,7 @@ export function RecipeCarousel({
         ref={scrollerRef}
         aria-label={label}
         className={clsx(
-          'flex w-full min-w-0 list-none gap-3 overflow-x-auto scroll-smooth pb-1 lg:gap-6',
+          'flex w-full min-w-0 list-none gap-3 overflow-x-auto scroll-smooth lg:gap-6',
           'snap-x snap-mandatory',
           '[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
         )}

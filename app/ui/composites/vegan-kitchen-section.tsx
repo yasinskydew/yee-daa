@@ -20,7 +20,8 @@ export function VeganKitchenSection({
   return (
     <section
       className={clsx(
-        'flex w-full min-w-0 flex-col gap-6 overflow-hidden border-t border-border pt-6',
+        'flex w-full min-w-0 flex-col gap-4 overflow-hidden border-t border-border pt-2',
+        'lg:gap-6 lg:pt-6',
         className,
       )}
     >
@@ -28,9 +29,9 @@ export function VeganKitchenSection({
 
       <div
         className={clsx(
-          'grid w-full min-w-0 items-stretch gap-4',
+          'grid w-full min-w-0 items-stretch gap-3',
           'grid-cols-1',
-          'md:grid-cols-3 md:gap-3',
+          'md:grid-cols-3',
           'lg:gap-4',
           'xl:gap-6',
         )}

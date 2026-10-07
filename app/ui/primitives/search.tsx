@@ -50,10 +50,10 @@ export function Search({
             type="search"
             placeholder={placeholder}
             className={clsx(
-              'w-full rounded-[var(--radius-md)] border border-foreground/48 bg-background',
+              'w-full rounded-[var(--radius-sm)] border border-foreground/48 bg-background',
               'h-8 pl-3 pr-8 text-sm font-normal text-placeholder outline-none',
               'placeholder:text-placeholder',
-              'lg:h-12 lg:pl-4 lg:pr-12 lg:text-lg',
+              'lg:h-12 lg:rounded-[var(--radius-md)] lg:pl-4 lg:pr-12 lg:text-lg',
               '[&::-webkit-search-cancel-button]:hidden',
             )}
           />
