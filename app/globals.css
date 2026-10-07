@@ -24,7 +24,8 @@ input[type='number']::-webkit-outer-spin-button {
   --primary-soft: #d7ff94;
   --primary-strong: #2db100;
   --muted: #a0aec0;
-  --border: rgba(0, 0, 0, 0.08);
+  --placeholder: #134B00;
+  --border: rgba(0, 0, 0, 0.16);
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
@@ -41,7 +42,7 @@ html.dark {
   --primary-soft: #2a3d14;
   --primary-strong: #b1ff2e;
   --muted: #718096;
-  --border: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.16);
 }
 
 @theme {
@@ -62,6 +63,7 @@ html.dark {
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-header: var(--header);
+  --color-placeholder: var(--placeholder);
   --font-sans: var(--font-inter);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);

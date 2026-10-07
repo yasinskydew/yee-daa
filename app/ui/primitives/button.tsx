@@ -22,8 +22,8 @@ export default function Button({
 }: ButtonProps) {
   const classes = clsx(
     'inline-flex items-center justify-center gap-2 font-semibold transition-opacity cursor-pointer',
-    size === 'sm' && 'h-10 px-4 text-sm rounded-[var(--radius-md)]',
-    size === 'md' && 'h-12 px-6 text-lg rounded-[var(--radius-md)]',
+    size === 'sm' && 'h-10 p-4 text-sm rounded-[var(--radius-md)]',
+    size === 'md' && 'h-12 p-6 text-lg rounded-[var(--radius-md)]',
     size === 'none' && 'p-0',
     variant === 'primary' && 'bg-primary text-primary-foreground',
     variant === 'secondary' && 'bg-foreground text-background',
