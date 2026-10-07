@@ -4,13 +4,15 @@ import {
   SectionMobileAction,
 } from '@/app/ui/composites/section-header'
 import { RecipeCard } from '@/app/ui/composites/recipe-card'
-import { JUICY_RECIPES } from '@/app/data/home-mocks'
+import type { RecipeCardProps } from '@/app/ui/composites/recipe-card'
 
 interface JuiciestRecipesSectionProps {
+  recipes: Omit<RecipeCardProps, 'variant' | 'className'>[]
   className?: string
 }
 
 export function JuiciestRecipesSection({
+  recipes,
   className,
 }: JuiciestRecipesSectionProps) {
   return (
@@ -34,7 +36,7 @@ export function JuiciestRecipesSection({
           'xl:grid-cols-2',
         )}
       >
-        {JUICY_RECIPES.slice(0, 4).map((recipe) => (
+        {recipes.map((recipe) => (
           <li key={recipe.href} className="min-w-0">
             <RecipeCard {...recipe} variant="horizontal" />
           </li>

@@ -2,19 +2,23 @@ import clsx from 'clsx'
 import { SectionHeader } from '@/app/ui/composites/section-header'
 import { RecipeCard } from '@/app/ui/composites/recipe-card'
 import { RecipeCarousel } from '@/app/ui/composites/recipe-carousel'
-import { NEW_RECIPES } from '@/app/data/home-mocks'
+import type { RecipeCardProps } from '@/app/ui/composites/recipe-card'
 
 interface NewRecipesSectionProps {
+  recipes: Omit<RecipeCardProps, 'variant' | 'className'>[]
   className?: string
 }
 
-export function NewRecipesSection({ className }: NewRecipesSectionProps) {
+export function NewRecipesSection({
+  recipes,
+  className,
+}: NewRecipesSectionProps) {
   return (
     <section className={clsx('flex w-full min-w-0 flex-col gap-3 lg:gap-6', className)}>
       <SectionHeader title="Новые рецепты" className="w-full" />
 
       <RecipeCarousel label="Новые рецепты">
-        {NEW_RECIPES.map((recipe) => (
+        {recipes.map((recipe) => (
           <li
             key={recipe.href}
             data-carousel-item

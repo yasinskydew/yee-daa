@@ -4,13 +4,15 @@ import {
   SectionMobileAction,
 } from '@/app/ui/composites/section-header'
 import { AuthorCard } from '@/app/ui/composites/author-card'
-import { CULINARY_BLOGS } from '@/app/data/home-mocks'
+import type { AuthorCardProps } from '@/app/ui/composites/author-card'
 
 interface CulinaryBlogsSectionProps {
+  authors: Omit<AuthorCardProps, 'className'>[]
   className?: string
 }
 
 export function CulinaryBlogsSection({
+  authors,
   className,
 }: CulinaryBlogsSectionProps) {
   return (
@@ -32,9 +34,9 @@ export function CulinaryBlogsSection({
       />
 
       <ul className="grid w-full grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
-        {CULINARY_BLOGS.map((blog) => (
-          <li key={blog.href} className="min-w-0">
-            <AuthorCard {...blog} className="h-full" />
+        {authors.map((author) => (
+          <li key={author.href} className="min-w-0">
+            <AuthorCard {...author} className="h-full" />
           </li>
         ))}
       </ul>
