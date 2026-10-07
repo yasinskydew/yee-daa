@@ -10,7 +10,7 @@ type NewRecipesSectionProps = {
 
 export default function NewRecipesSection({ className }: NewRecipesSectionProps) {
   return (
-    <section className={clsx('flex w-full min-w-0 flex-col gap-6', className)}>
+    <section className={clsx('flex w-full min-w-0 flex-col gap-3 lg:gap-6', className)}>
       <SectionHeader title="Новые рецепты" className="w-full" />
 
       <RecipeCarousel label="Новые рецепты">
@@ -18,7 +18,7 @@ export default function NewRecipesSection({ className }: NewRecipesSectionProps)
           <li
             key={recipe.href}
             data-carousel-item
-            className="w-[min(100%,322px)] shrink-0 snap-start"
+            className="w-[158px] shrink-0 snap-start lg:w-[277px] xl:w-[322px]"
           >
             <RecipeCard {...recipe} variant="vertical" />
           </li>

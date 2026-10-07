@@ -93,6 +93,7 @@ export const JUICY_RECIPES: Omit<RecipeCardProps, 'variant' | 'className'>[] = [
     categoryLabel: 'Вторые блюда',
     categoryIcon: 'main-courses',
     likes: 85,
+    recommends: 152,
     imageSrc: '/dishes/kneli.jpg',
   },
   {
@@ -103,6 +104,7 @@ export const JUICY_RECIPES: Omit<RecipeCardProps, 'variant' | 'className'>[] = [
     categoryLabel: 'Вторые блюда',
     categoryIcon: 'main-courses',
     likes: 159,
+    recommends: 257,
     imageSrc: '/dishes/ham.jpg',
   },
   {
@@ -113,6 +115,7 @@ export const JUICY_RECIPES: Omit<RecipeCardProps, 'variant' | 'className'>[] = [
     categoryLabel: 'Вторые блюда',
     categoryIcon: 'main-courses',
     likes: 258,
+    recommends: 342,
     imageSrc: '/dishes/noodles.jpg',
   },
   {
@@ -123,6 +126,7 @@ export const JUICY_RECIPES: Omit<RecipeCardProps, 'variant' | 'className'>[] = [
     categoryLabel: 'Национальные',
     categoryIcon: 'national',
     likes: 124,
+    recommends: 370,
     imageSrc: '/dishes/tomyum.jpg',
   },
   {

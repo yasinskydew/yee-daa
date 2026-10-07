@@ -25,7 +25,7 @@ export default function PlatformLayout({
       <Header notifications={USER_NOTIFICATIONS} categories={categories} />
 
       <div className="flex min-h-0 flex-1 overflow-hidden">
-        <aside className="hidden min-h-0 w-64 shrink-0 flex-col overflow-hidden py-6 md:flex border-r border-border">
+        <aside className="hidden min-h-0 w-64 shrink-0 flex-col overflow-hidden border-r border-border py-6 lg:flex">
           <div className="min-h-0 flex-1 overflow-y-auto">
             <Suspense fallback={null}>
               <CategoryNav
@@ -37,21 +37,21 @@ export default function PlatformLayout({
           <FooterLeft className="px-6" />
         </aside>
 
-        <main className="min-h-0 min-w-0 flex-1 overflow-x-visible overflow-y-auto px-4 pb-20 md:pb-0 md:pl-6 md:pr-[72px]">
+        <main className="min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-4 pb-6 lg:pb-0 lg:pl-6 lg:pr-[72px]">
           {children}
         </main>
 
-        <aside className="hidden w-[208px] shrink-0 flex-col items-center md:flex">
+        <aside className="hidden w-[208px] shrink-0 flex-col items-center lg:flex">
           <UserNotifications
             {...USER_NOTIFICATIONS}
             orientation="vertical"
-            className="md:py-4 md:pl-2"
+            className="lg:py-4 lg:pl-2"
           />
           <WriteRecipeCta className="mt-auto pb-10" />
         </aside>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 md:hidden">
+      <div className="bg-header lg:hidden">
         <AppNav orientation="horizontal" />
       </div>
     </div>

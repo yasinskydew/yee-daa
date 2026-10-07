@@ -15,7 +15,7 @@ export default function CulinaryBlogsSection({
   return (
     <section
       className={clsx(
-        'flex w-full min-w-0 flex-col gap-6 rounded-2xl bg-primary p-3 md:p-3 lg:p-6',
+        'flex w-full min-w-0 flex-col gap-3 rounded-2xl bg-primary p-3 lg:gap-6 lg:p-6',
         className,
       )}
     >
@@ -25,7 +25,7 @@ export default function CulinaryBlogsSection({
           label: 'Все авторы',
           href: '/blogs',
           variant: 'outlined',
-          className: 'hidden lg:inline-flex',
+          className: 'max-lg:hidden',
         }}
         className="w-full"
       />

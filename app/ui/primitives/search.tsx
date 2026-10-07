@@ -23,7 +23,10 @@ export default function Search({
   return (
     <form
       role="search"
-      className={clsx('flex w-full flex-col items-center gap-4 pb-8', className)}
+      className={clsx(
+        'flex w-full flex-col items-center gap-2 pb-0 lg:gap-4 lg:pb-8',
+        className,
+      )}
       onSubmit={(event) => event.preventDefault()}
     >
       <div className="flex w-full max-w-[518px] items-center justify-center gap-3">
@@ -32,9 +35,9 @@ export default function Search({
           variant="ghost"
           size="none"
           aria-label="Фильтры"
-          className="size-12 shrink-0 rounded-[var(--radius-md)] border-foreground/48 px-3"
+          className="size-8 shrink-0 rounded-[var(--radius-md)] border-foreground/48 px-2 lg:size-12 lg:px-3"
         >
-          <SearchIcon />
+          <SearchIcon className="size-3.5 lg:size-6" />
         </Button>
 
         <div className="relative min-w-0 flex-1">
@@ -47,23 +50,24 @@ export default function Search({
             type="search"
             placeholder={placeholder}
             className={clsx(
-              'h-12 w-full rounded-[var(--radius-md)] border border-foreground/48 bg-background',
-              'pl-4 pr-12 text-lg font-normal text-placeholder outline-none',
+              'w-full rounded-[var(--radius-md)] border border-foreground/48 bg-background',
+              'h-8 pl-3 pr-8 text-sm font-normal text-placeholder outline-none',
               'placeholder:text-placeholder',
+              'lg:h-12 lg:pl-4 lg:pr-12 lg:text-lg',
               '[&::-webkit-search-cancel-button]:hidden',
             )}
           />
           <button
             type="submit"
             aria-label="Найти"
-            className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-foreground"
+            className="absolute inset-y-0 right-0 flex w-8 items-center justify-center text-foreground lg:w-12"
           >
-            <MagnifyingGlassIcon />
+            <MagnifyingGlassIcon className="size-3.5 lg:size-6" />
           </button>
         </div>
       </div>
 
-      <div className="flex w-full max-w-[518px] flex-wrap items-center gap-4">
+      <div className="hidden w-full max-w-[518px] flex-wrap items-center gap-4 lg:flex">
         <Switch
           label="Исключить мои аллергены"
           checked={excludeAllergens}

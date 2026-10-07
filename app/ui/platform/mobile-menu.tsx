@@ -30,7 +30,7 @@ export default function MobileMenu({ categories, className }: MobileMenuProps) {
   }, [open])
 
   return (
-    <div className={clsx('md:hidden', className)}>
+    <div className={clsx('lg:hidden', className)}>
       <button
         type="button"
         aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
@@ -43,7 +43,7 @@ export default function MobileMenu({ categories, className }: MobileMenuProps) {
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-0 z-50 lg:hidden">
           <button
             type="button"
             aria-label="Закрыть меню"

@@ -4,23 +4,33 @@ import clsx from 'clsx'
 export type NotificationCardProps = {
   count: number
   icon: ReactNode
+  size?: 'sm' | 'md'
   className?: string
 }
 
 export default function NotificationCard({
   count,
   icon,
+  size = 'md',
   className,
 }: NotificationCardProps) {
   return (
     <div
       className={clsx(
-        'flex items-center gap-2',
+        'flex items-center',
+        size === 'sm' ? 'gap-1.5' : 'gap-2',
         className,
       )}
     >
       {icon}
-      <span className="text-base font-medium leading-none text-primary-strong">
+      <span
+        className={clsx(
+          'font-semibold text-primary-strong',
+          size === 'sm'
+            ? 'text-xs leading-4'
+            : 'text-base font-medium leading-none',
+        )}
+      >
         {count}
       </span>
     </div>

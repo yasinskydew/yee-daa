@@ -19,14 +19,14 @@ export default function VeganKitchenSection({
   return (
     <section
       className={clsx(
-        'flex w-full min-w-0 flex-col gap-6 border-t border-border pt-6',
+        'flex w-full min-w-0 flex-col gap-6 overflow-hidden border-t border-border pt-6',
         className,
       )}
     >
-      <header className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
+      <header className="flex min-w-0 flex-col gap-3 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
         <h2
           className={clsx(
-            'shrink-0 font-medium text-foreground',
+            'min-w-0 shrink-0 font-medium text-foreground',
             'text-2xl leading-8',
             'lg:text-[36px] lg:leading-10',
             'xl:text-5xl xl:leading-none',
@@ -34,17 +34,20 @@ export default function VeganKitchenSection({
         >
           Веганская кухня
         </h2>
-        <p className="text-base leading-6 font-medium text-foreground/64 xl:w-[668px] xl:shrink-0">
+        <p className="min-w-0 text-base leading-6 font-medium break-words text-foreground/64 xl:max-w-[668px] xl:shrink-0">
           {DESCRIPTION}
         </p>
       </header>
 
       <div
         className={clsx(
-          'grid w-full min-w-0 grid-cols-1 gap-4',
-          'md:h-[168px] md:grid-cols-3 md:gap-3',
-          'lg:h-[180px] lg:gap-4',
-          'xl:h-[192px] xl:grid-cols-[322px_322px_minmax(0,1fr)] xl:gap-6',
+          'grid w-full min-w-0 items-stretch gap-4',
+          // 360: колонка
+          'grid-cols-1',
+          // 768+: 3 равные колонки, высота по контенту
+          'md:grid-cols-3 md:gap-3',
+          'lg:gap-4',
+          'xl:gap-6',
         )}
       >
         {VEGAN_FEATURED_RECIPES.map((recipe) => (
@@ -52,14 +55,14 @@ export default function VeganKitchenSection({
             key={recipe.href}
             {...recipe}
             variant="text"
-            className="min-w-0 md:h-full"
+            className="min-w-0"
           />
         ))}
 
-        <ul className="flex min-w-0 flex-col gap-1.5 md:h-full lg:gap-3">
+        <ul className="flex min-w-0 flex-col gap-3 md:gap-1.5 lg:gap-3">
           {VEGAN_QUICK_RECIPES.map((recipe) => (
-            <li key={recipe.href} className="min-h-0 min-w-0 md:flex-1">
-              <RecipeActionCard {...recipe} className="h-full" />
+            <li key={recipe.href} className="min-w-0">
+              <RecipeActionCard {...recipe} className="min-w-0" />
             </li>
           ))}
         </ul>

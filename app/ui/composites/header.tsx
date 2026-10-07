@@ -15,22 +15,22 @@ type HeaderProps = {
 
 export default function Header({ notifications, categories }: HeaderProps) {
   return (
-    <header className="flex h-20 shrink-0 items-center justify-between bg-header px-2 sm:px-4">
+    <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center justify-between bg-header px-2 py-2 sm:px-4 lg:h-20">
       <div className="flex min-w-0 flex-1 items-center">
-        <div className="flex shrink-0 items-center md:w-64">
+        <div className="flex shrink-0 items-center lg:w-64">
           <Logo size="sm" className="md:hidden" />
           <Logo size="md" className="hidden md:block" />
         </div>
         <Suspense fallback={null}>
-          <BreadcrumbsNav className="hidden min-w-0 flex-1 md:flex md:px-[7px]" />
+          <BreadcrumbsNav className="hidden min-w-0 flex-1 lg:flex lg:px-[7px]" />
         </Suspense>
       </div>
 
-      <div className="flex items-center gap-4 md:gap-0">
+      <div className="flex items-center gap-1 sm:gap-2 lg:gap-0">
         <UserNotifications
           {...notifications}
           orientation="horizontal"
-          className="md:hidden"
+          className="lg:hidden"
         />
         <MobileMenu categories={categories} />
         <UserCard
@@ -39,7 +39,7 @@ export default function Header({ notifications, categories }: HeaderProps) {
           imageSrc="/avatar-mock.jpg"
           imageAlt="User"
           href="#"
-          className="hidden md:block md:pr-16"
+          className="hidden lg:block lg:pr-16"
         />
       </div>
     </header>

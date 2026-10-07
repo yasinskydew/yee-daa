@@ -13,7 +13,8 @@ import clsx from 'clsx'
 import { ArrowLeftIcon } from '@/app/ui/icons/arrow-left'
 import { ArrowRightIcon } from '@/app/ui/icons/arrow-right'
 
-const GAP_PX = 24
+const GAP_PX_MOBILE = 12
+const GAP_PX_DESKTOP = 24
 
 type RecipeCarouselProps = {
   children: ReactNode
@@ -75,7 +76,11 @@ export default function RecipeCarousel({
     const firstItem = el.querySelector<HTMLElement>('[data-carousel-item]')
     if (!firstItem) return el.clientWidth
 
-    return firstItem.offsetWidth + GAP_PX
+    const gap =
+      window.matchMedia('(min-width: 90rem)').matches
+        ? GAP_PX_DESKTOP
+        : GAP_PX_MOBILE
+    return firstItem.offsetWidth + gap
   }, [])
 
   const scrollByStep = useCallback(
@@ -96,7 +101,7 @@ export default function RecipeCarousel({
         ref={scrollerRef}
         aria-label={label}
         className={clsx(
-          'flex w-full min-w-0 list-none gap-6 overflow-x-auto scroll-smooth pb-1',
+          'flex w-full min-w-0 list-none gap-3 overflow-x-auto scroll-smooth pb-1 lg:gap-6',
           'snap-x snap-mandatory',
           '[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
         )}
@@ -116,14 +121,14 @@ export default function RecipeCarousel({
       </ul>
 
       {hasOverflow ? (
-        <div className="pointer-events-none absolute inset-y-0 -inset-x-2 z-10 flex items-center justify-between">
+        <div className="pointer-events-none absolute inset-y-0 -inset-x-2 z-10 hidden items-center justify-between lg:flex">
           <button
             type="button"
             aria-label="Предыдущие рецепты"
             disabled={!canPrev}
             onClick={() => scrollByStep(-1)}
             className={clsx(
-              'pointer-events-auto flex size-12 shrink-0 items-center justify-center rounded-[var(--radius-md)] px-3 mb-18',
+              'pointer-events-auto mb-18 flex size-12 shrink-0 items-center justify-center rounded-[var(--radius-md)] px-3',
               'bg-foreground text-header shadow-elevation-1 transition-opacity',
             )}
           >
@@ -135,7 +140,7 @@ export default function RecipeCarousel({
             disabled={!canNext}
             onClick={() => scrollByStep(1)}
             className={clsx(
-              'pointer-events-auto flex size-12 shrink-0 items-center justify-center rounded-[var(--radius-md)] px-3 mb-18',
+              'pointer-events-auto mb-18 flex size-12 shrink-0 items-center justify-center rounded-[var(--radius-md)] px-3',
               'bg-foreground text-header shadow-elevation-1 transition-opacity',
             )}
           >

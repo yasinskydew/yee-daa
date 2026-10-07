@@ -30,19 +30,24 @@ export default function AuthorCard({
       )}
     >
       <Link href={href} className="flex h-full flex-col">
-        <div className="flex items-center gap-3 px-6 pt-6 pb-4">
-          <Avatar name={name} imageSrc={imageSrc} imageAlt={imageAlt} />
+        <div className="flex items-center gap-2 px-4 pt-4 pb-2 lg:gap-3 lg:px-6 lg:pt-6 lg:pb-4">
+          <Avatar
+            name={name}
+            imageSrc={imageSrc}
+            imageAlt={imageAlt}
+            className="size-8 lg:size-12"
+          />
           <div className="min-w-0">
-            <p className="truncate text-lg font-medium leading-7 text-foreground">
+            <p className="truncate text-base font-medium leading-6 text-foreground lg:text-lg lg:leading-7">
               {name}
             </p>
-            <p className="truncate text-sm leading-5 font-normal text-foreground/64">
+            <p className="truncate text-xs leading-4 font-normal text-foreground/64 lg:text-sm lg:leading-5">
               {handle}
             </p>
           </div>
         </div>
-        <div className="px-6 pt-3 pb-5">
-          <p className="h-16 line-clamp-3 text-sm leading-5 font-normal text-foreground">
+        <div className="px-4 pt-2 pb-4 lg:px-6 lg:pt-3 lg:pb-5">
+          <p className="line-clamp-3 max-h-[3.75rem] overflow-hidden text-sm leading-5 font-normal text-foreground">
             {description}
           </p>
         </div>
