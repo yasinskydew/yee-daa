@@ -7,6 +7,8 @@ type SectionHeaderProps = {
   action?: {
     label: string
     href: string
+    variant?: 'primary' | 'secondary' | 'ghost' | 'outlined'
+    className?: string
   }
   className?: string
 }
@@ -43,9 +45,10 @@ export default function SectionHeader({
       {action ? (
         <Button
           size="md"
+          variant={action.variant ?? 'primary'}
           rightIcon={<ArrowRightIcon className="size-6" />}
           href={action.href}
-          className="shrink-0"
+          className={clsx('shrink-0', action.className)}
         >
           {action.label}
         </Button>

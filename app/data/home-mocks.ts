@@ -1,4 +1,5 @@
 import type { RecipeCardProps } from '@/app/ui/composites/recipe-card'
+import type { AuthorCardProps } from '@/app/ui/composites/author-card'
 
 export const NEW_RECIPES: Omit<RecipeCardProps, 'variant' | 'className'>[] = [
   {
@@ -163,5 +164,80 @@ export const JUICY_RECIPES: Omit<RecipeCardProps, 'variant' | 'className'>[] = [
     categoryIcon: 'national',
     likes: 124,
     imageSrc: '/dishes/tomyum.jpg',
+  },
+]
+
+export const VEGAN_FEATURED_RECIPES: Omit<
+  RecipeCardProps,
+  'variant' | 'className' | 'imageSrc' | 'imageAlt'
+>[] = [
+  {
+    title: 'Картошка, тушенная с болгарским перцем и фасолью в томатном соусе',
+    description:
+      'Картошка, тушенная с болгарским перцем, фасолью, морковью и луком, — вариант сытного блюда на каждый день. Фасоль в данном случае заменяет мясо, делая рагу сытным и питательным.',
+    href: '/recipes/17',
+    categoryLabel: 'Вторые блюда',
+    categoryIcon: 'main-courses',
+    likes: 1,
+    recommends: 1,
+  },
+  {
+    title: 'Капустные котлеты',
+    description:
+      'Капустные котлеты по этому рецепту получаются необычайно пышными и невероятно вкусными. Мягкий вкус и лёгкая пряная нотка наверняка помогут сделать эти чудесные котлеты из капусты одним из ваших любимых овощных блюд.',
+    href: '/recipes/18',
+    categoryLabel: 'Вторые блюда',
+    categoryIcon: 'main-courses',
+    likes: 2,
+    recommends: 1,
+  },
+]
+
+export const VEGAN_QUICK_RECIPES: {
+  title: string
+  href: string
+  categoryIcon: RecipeCardProps['categoryIcon']
+}[] = [
+  {
+    title: 'Стейк для вегетарианцев',
+    href: '/recipes/19',
+    categoryIcon: 'main-courses',
+  },
+  {
+    title: 'Котлеты из гречки и фасоли',
+    href: '/recipes/20',
+    categoryIcon: 'main-courses',
+  },
+  {
+    title: 'Сырный суп с лапшой и брокколи',
+    href: '/recipes/21',
+    categoryIcon: 'first-courses',
+  },
+]
+
+const BLOG_SNIPPET =
+  'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.'
+
+export const CULINARY_BLOGS: Omit<AuthorCardProps, 'className'>[] = [
+  {
+    name: 'Елена Высоцкая',
+    handle: '@elenapovar',
+    description: BLOG_SNIPPET,
+    href: '/blogs/1',
+    imageSrc: '/avatars/elena.jpg',
+  },
+  {
+    name: 'Alex Cook',
+    handle: '@funtasticooking',
+    description: BLOG_SNIPPET,
+    href: '/blogs/2',
+    imageSrc: '/avatars/alex.jpg',
+  },
+  {
+    name: 'Екатерина Константинопольская',
+    handle: '@bake_and_pie',
+    description: BLOG_SNIPPET,
+    href: '/blogs/3',
+    imageSrc: '/avatars/ekaterina.jpg',
   },
 ]

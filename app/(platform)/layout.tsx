@@ -25,7 +25,7 @@ export default function PlatformLayout({
       <Header notifications={USER_NOTIFICATIONS} categories={categories} />
 
       <div className="flex min-h-0 flex-1 overflow-hidden">
-        <aside className="hidden min-h-0 w-64 shrink-0 flex-col overflow-hidden py-6 md:flex">
+        <aside className="hidden min-h-0 w-64 shrink-0 flex-col overflow-hidden py-6 md:flex border-r border-border">
           <div className="min-h-0 flex-1 overflow-y-auto">
             <Suspense fallback={null}>
               <CategoryNav
