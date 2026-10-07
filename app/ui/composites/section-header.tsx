@@ -1,28 +1,55 @@
-import clsx from "clsx";
-import Button from "@/app/ui/primitives/button";
-import { ArrowRightIcon } from "@/app/ui/icons/arrow-right";
+import clsx from 'clsx'
+import Button from '@/app/ui/primitives/button'
+import { ArrowRightIcon } from '@/app/ui/icons/arrow-right'
 
 type SectionHeaderProps = {
-  title: string;
+  title: string
   action?: {
-    label: string;
-    href: string;
-  };
-  className?: string;
-};
+    label: string
+    href: string
+  }
+  className?: string
+}
 
-export default function SectionHeader({ title, action, className }: SectionHeaderProps) {
+/**
+ * Section title row from home frames:
+ * - 360/768: 24/32 medium
+ * - 1440 (lg): 36/40 medium
+ * - 1920 (xl): 48/48 medium
+ * Action CTA matches Figma Button size=lg (h-12, text-lg/semibold).
+ */
+export default function SectionHeader({
+  title,
+  action,
+  className,
+}: SectionHeaderProps) {
   return (
-    <header className={clsx('flex justify-between items-end gap-4', className)}>
-      <h2 
+    <header
+      className={clsx(
+        'flex items-end justify-between gap-6',
+        className,
+      )}
+    >
+      <h2
         className={clsx(
-          'text-foreground font-medium',
-          'text-[32px] leading-8 md:text-[40px] xl:text-5xl xl:leading-none'
+          'font-medium text-foreground',
+          'text-2xl leading-8',
+          'lg:text-[36px] lg:leading-10',
+          'xl:text-5xl xl:leading-none',
         )}
       >
-          {title}
+        {title}
       </h2>
-      {action ? <Button rightIcon={<ArrowRightIcon />} href={action.href}>{action.label}</Button> : null}
+      {action ? (
+        <Button
+          size="md"
+          rightIcon={<ArrowRightIcon className="size-6" />}
+          href={action.href}
+          className="shrink-0"
+        >
+          {action.label}
+        </Button>
+      ) : null}
     </header>
-  );
+  )
 }

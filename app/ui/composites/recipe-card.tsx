@@ -77,7 +77,7 @@ export default function RecipeCard({
           )}
         >
           <div className="flex flex-col gap-2 text-foreground">
-            <h3 className="text-xl font-medium leading-7">{title}</h3>
+            <h3 className="line-clamp-1 text-xl font-medium leading-7">{title}</h3>
             <p className="line-clamp-3 text-sm leading-5">{description}</p>
           </div>
 

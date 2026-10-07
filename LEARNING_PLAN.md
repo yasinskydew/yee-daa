@@ -168,14 +168,14 @@ https://nextjs.org/docs/app/api-reference/components/font
 |---|---|---|
 | 0 | Shell (layout) | `aside` (~256) + `main` + sticky bottom; отступы; `AppNav` vertical/horizontal; нет гориз. скролла на 360 |
 | 1 | Каркас секций `/home` | Порядок: приветствие → Новые рецепты → Самое сочное → Кулинарные блоги → превью категории; `SectionHeader` + 1–2 мок-карточки |
-| 2 | Сетки | Новые: ряд/карусель `vertical`; Сочное: `horizontal` `grid-cols-2→1`; Блоги: `grid-cols-3→1`; gap снаружи карточек |
+| 2 | Сетки + карусель | Новые: `RecipeCarousel` + `vertical` cards; Сочное: `horizontal` `grid-cols-2→1`; Блоги: `grid-cols-3→1`; gap снаружи карточек |
 | 3 | Header home | h1 «Приятного аппетита!»; `SearchInput` (можно non-functional); фильтры — заглушка; ≠ `AppNav` |
 | 4 | Пиксель | Проход 1920 → 1440 → 768 → 360; кегли/gap/размеры карточек; ≤2px или исключение в «Разбор ошибок» |
 | 5 | Полировка | dark; `href` секций на заглушки маршрутов; убрать/оставить playground на `/subscriptions` |
 
-Порядок файлов: фаза 0 → `layout` / `app-nav`; 1–2 → `home/page` + моки; 3 → primitive search; 4 → только spacing/typography.
+Порядок файлов: фаза 0 → `layout` / `app-nav`; 1–2 → `home/page` + моки + `recipe-carousel`; 3 → primitive search; 4 → только spacing/typography.
 
-**Вне скоупа п.6:** живой поиск, API/типы (п.7), идеальная карусель со стрелками.
+**Вне скоупа п.6:** живой поиск, API/типы (п.7). Карусель «Новые рецепты» со стрелками — **в скоупе** (см. ниже).
 
 ### Shell: независимый scroll (CategoryNav ≠ FooterLeft)
 
@@ -242,6 +242,78 @@ Backdrop / `fixed inset-0` задаёт высоту панели (`inset-y-0`).
 - Слот: правый `aside` (`w-[208px]`), под `UserNotifications`, `mt-auto`; только `md+`
 - Не смешивать со счётчиками и не расширять UI-kit Button
 - Живой create — п.14
+
+### Карусель «Новые рецепты» (`RecipeCarousel`)
+
+Макет (`home page_*` → `new recipes`): заголовок + горизонтальный ряд `RecipeCard` (vertical, ~322px) + стрелки 48×48 по краям. На узких экранах видно 1–2 карточки, на широких — больше; остальное уезжает в горизонтальный scroll **внутри** секции, не всей страницы.
+
+#### Файлы
+
+| Файл | Роль |
+|---|---|
+| `app/ui/composites/recipe-carousel.tsx` | Client: scroller + стрелки + состояние краёв |
+| `app/ui/composites/new-recipes-section.tsx` | Секция: `SectionHeader` + `RecipeCarousel` + map моков |
+| `app/data/home-mocks.ts` | `NEW_RECIPES` (≥ 8 штук, чтобы overflow был на desktop) |
+| `app/ui/icons/arrow-left.tsx` / `arrow-right.tsx` | Иконки из Figma, `currentColor` |
+
+#### Архитектура
+
+```
+NewRecipesSection          server OK
+  SectionHeader
+  RecipeCarousel           'use client'
+    ul[ref] overflow-x-auto snap-x   ← единственный горизонтальный scroll
+      li[data-carousel-item]         ← ширина карточки + gap = шаг
+    overlay absolute                 ← стрелки; pointer-events-none на слое
+      button prev / next             ← pointer-events-auto
+```
+
+Стрелки **не** двигают transform и **не** режут DOM на «страницы». Они вызывают `scrollBy({ left: ±step, behavior: 'smooth' })`, где `step = offsetWidth(первой li) + gap (24)`.
+
+#### Почему ломается overflow
+
+Flex-ребёнок по умолчанию `min-width: auto` = ширина контента. Ряд карточек с `shrink-0` раздувает предков → `scrollWidth === clientWidth` → скролла нет, стрелка «вперёд» бесполезна, едет вся страница.
+
+Цепочка обязана сжиматься:
+
+```
+main / page / section / carousel wrap / ul
+  → везде min-w-0 (и w-full где нужно)
+ul → overflow-x-auto
+li → shrink-0 w-[min(100%,322px)] snap-start
+```
+
+#### Состояние стрелок
+
+1. `maxScroll = scrollWidth - clientWidth`
+2. `canPrev = scrollLeft > ε`
+3. `canNext = maxScroll > ε && scrollLeft < maxScroll - ε`
+4. Слой стрелок рендерить только если `canPrev || canNext` (нет overflow — нет кнопок)
+5. На краю соответствующая кнопка `disabled`
+
+Пересчёт:
+
+- `useLayoutEffect` после children (первый paint)
+- `scroll` на `ul` (passive)
+- `ResizeObserver` на `ul` **и** на каждый `li` (ширина карточки / viewport)
+- `window.resize`
+- логику обновления удобно держать в `useEffectEvent`, чтобы не плодить stale closures в listeners
+
+#### UX / a11y
+
+- Скрытый scrollbar: `scrollbar-width: none` + webkit
+- `snap-x snap-mandatory` + `snap-start` на item — выравнивание после свайпа
+- `tabIndex={0}` на `ul`, `ArrowLeft` / `ArrowRight` на клавиатуре
+- `aria-label` на списке и на кнопках («Предыдущие / Следующие рецепты»)
+- Кнопки: `size-12`, `rounded-[var(--radius-md)]`, `bg-foreground text-header` (как чёрная кнопка + cream-иконка в макете); слой `-inset-x-2`, по вертикали по центру ряда
+
+#### Чеклист
+
+- [ ] 1920 / 1440: видно несколько карточек, стрелка вправо; влево скрыта/disabled у старта  
+- [ ] После клика «вперёд» появляется «назад»; у конца — «вперёд» disabled  
+- [ ] 768 / 360: 1–2 карточки, свайп и стрелки работают, **нет** горизонтального скролла всей страницы  
+- [ ] Resize окна пересчитывает `canPrev` / `canNext`  
+- [ ] Клавиатура ←/→ при фокусе на списке  
 
 Ссылки → [Useful links](#useful-links).
 
@@ -554,6 +626,17 @@ https://nextjs.org/docs/app/api-reference/cli/next
 | `flex-1` без `min-h-0` | Flex-ребёнок не сжимается ниже контента, inner scroll не включается | Пара: `flex-1 min-h-0 overflow-y-auto` |
 | `flex-1` на `CategoryNav` внутри `<Suspense>` | Flex-ребёнок aside = Suspense, не nav | Обёртка-div вокруг Suspense+nav |
 | `mt-auto` на футере при растущем aside | Футер «прибивается» к низу **контента**, не viewport | Сначала ограничить высоту aside, потом `shrink-0` |
+
+### Carousel / горизонтальный scroll
+
+| Ошибка | Почему плохо | Как правильно |
+|---|---|---|
+| Нет `min-w-0` на page / section / wrap / `ul` | Flex раздувается по карточкам, `scrollWidth ≈ clientWidth` | Цепочка `min-w-0` + `overflow-x-auto` только на scroller |
+| Стрелки через `translateX` / «страницы» из массива | Ломает нативный свайп и a11y-скролл | `scrollBy` по ширине item + gap |
+| `ResizeObserver` только на `ul` | Смена ширины item / загрузка картинок не обновляет края | Observe `ul` и каждый `li` |
+| Стрелки всегда visible | На экране без overflow шумят | Рендер overlay только при `canPrev \|\| canNext` |
+| `pointer-events-none` забыли снять на кнопках | Клики не доходят | Слой `pointer-events-none`, кнопки `pointer-events-auto` |
+| Моков ≤ числа видимых карточек | На desktop нет overflow — карусель «мёртвая» | ≥ 8 рецептов в `home-mocks` для проверки |
 
 ### SectionHeader / Button-as-Link / иконки
 
