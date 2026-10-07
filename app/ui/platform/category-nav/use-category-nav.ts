@@ -6,7 +6,7 @@ import {
   categoryHref,
   findActiveParentSlug,
   type CategoryFilter,
-} from '@/app/data/categories'
+} from '@/app/data/category-helpers'
 import type { Category } from '@/app/data/types'
 
 export function useCategoryNav(categories: Category[]) {

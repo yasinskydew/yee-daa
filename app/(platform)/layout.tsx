@@ -13,12 +13,12 @@ const USER_NOTIFICATIONS = {
   likes: 587,
 } as const
 
-export default function PlatformLayout({
+export default async function PlatformLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const categories = getCategories()
+  const categories = await getCategories()
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">

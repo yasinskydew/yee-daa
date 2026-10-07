@@ -1,32 +1,90 @@
-import categoriesJson from '@/data/categories.json'
-import type { Category } from '@/app/data/types'
+import 'server-only'
 
-const categories = categoriesJson as Category[]
+import { apiFetch } from '@/app/lib/api/client'
+import type { Category, CategoryChild } from '@/app/data/types'
+import { CATEGORY_ICONS, type CategoryIconName } from '@/app/ui/icons'
 
-export type CategoryFilter = {
-  cat?: string | null
-  sub?: string | null
+export {
+  categoryHref,
+  parseCategoryFilter,
+  findActiveParentSlug,
+  isCategoryActive,
+  isChildCategoryActive,
+  findCategoryInList,
+  type CategoryFilter,
+} from '@/app/data/category-helpers'
+
+/** Wire DTO matching SubCategoryResponse (UUID serialized as string) */
+interface CategoryChildDto {
+  id: string
+  slug: string
+  title: string
+  sort_order: number
 }
 
-export function categoryHref(cat: string, sub?: string) {
-  const params = new URLSearchParams({ cat })
-  if (sub) params.set('sub', sub)
-  return `/home?${params.toString()}`
+/** Wire DTO matching CategoryResponse */
+interface CategoryDto {
+  id: string
+  slug: string
+  title: string
+  icon: string
+  sort_order: number
+  children: CategoryChildDto[]
 }
 
-export function getCategories(): Category[] {
-  return categories
+function toCategoryIconName(icon: string): CategoryIconName {
+  if (icon in CATEGORY_ICONS) {
+    return icon as CategoryIconName
+  }
+  return 'salads'
 }
 
-export function getCategoryBySlug(slug: string): Category | undefined {
-  return categories.find((category) => category.slug === slug)
+function mapChild(dto: CategoryChildDto): CategoryChild {
+  return {
+    id: dto.id,
+    slug: dto.slug,
+    title: dto.title,
+    sort_order: dto.sort_order,
+  }
 }
 
-export function findCategoryByAnySlug(slug: string): {
-  category: Category
-  childSlug?: string
-} | undefined {
-  const parent = getCategoryBySlug(slug)
+function mapCategory(dto: CategoryDto): Category {
+  return {
+    id: dto.id,
+    slug: dto.slug,
+    title: dto.title,
+    icon: toCategoryIconName(dto.icon),
+    sort_order: dto.sort_order,
+    children: (dto.children ?? []).map(mapChild),
+  }
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const data = await apiFetch<CategoryDto[]>('/categories')
+  if (!data) return []
+  return data.map(mapCategory)
+}
+
+export async function getCategoryBySlug(
+  slug: string,
+): Promise<Category | undefined> {
+  // 404 → apiFetch returns null ({ detail: string } from NotFoundError)
+  const data = await apiFetch<CategoryDto>(
+    `/categories/${encodeURIComponent(slug)}`,
+  )
+  if (!data) return undefined
+  return mapCategory(data)
+}
+
+export async function findCategoryByAnySlug(slug: string): Promise<
+  | {
+      category: Category
+      childSlug?: string
+    }
+  | undefined
+> {
+  const categories = await getCategories()
+  const parent = categories.find((category) => category.slug === slug)
   if (parent) return { category: parent }
 
   for (const category of categories) {
@@ -35,35 +93,4 @@ export function findCategoryByAnySlug(slug: string): {
   }
 
   return undefined
-}
-
-export function parseCategoryFilter(
-  params: Pick<CategoryFilter, 'cat' | 'sub'>,
-): CategoryFilter {
-  return {
-    cat: params.cat || null,
-    sub: params.sub || null,
-  }
-}
-
-export function findActiveParentSlug(
-  filter: CategoryFilter,
-  items: Category[] = categories,
-): string | null {
-  if (!filter.cat) return null
-  return items.some((category) => category.slug === filter.cat)
-    ? filter.cat
-    : null
-}
-
-export function isCategoryActive(filter: CategoryFilter, category: Category) {
-  return filter.cat === category.slug
-}
-
-export function isChildCategoryActive(
-  filter: CategoryFilter,
-  parentSlug: string,
-  childSlug: string,
-) {
-  return filter.cat === parentSlug && filter.sub === childSlug
 }

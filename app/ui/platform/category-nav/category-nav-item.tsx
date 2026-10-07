@@ -6,7 +6,7 @@ import {
   categoryHref,
   isChildCategoryActive,
   type CategoryFilter,
-} from '@/app/data/categories'
+} from '@/app/data/category-helpers'
 import type { Category } from '@/app/data/types'
 import { CategoryIcon, ChevronDownIcon } from '@/app/ui/icons'
 

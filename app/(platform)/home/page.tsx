@@ -6,6 +6,7 @@ import { VeganKitchenSection } from '@/app/ui/composites/vegan-kitchen-section'
 import { RecipeCard } from '@/app/ui/composites/recipe-card'
 import {
   getAuthors,
+  getCategories,
   getCategoryBySlug,
   getJuicyRecipes,
   getNewRecipes,
@@ -13,7 +14,7 @@ import {
   getVeganFeaturedRecipes,
   getVeganQuickRecipes,
 } from '@/app/data/api'
-import { parseCategoryFilter } from '@/app/data/categories'
+import { parseCategoryFilter } from '@/app/data/category-helpers'
 import {
   toAuthorCardProps,
   toRecipeActionCardProps,
@@ -28,28 +29,43 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const params = await searchParams
   const filter = parseCategoryFilter(params)
   const hasCategoryFilter = Boolean(filter.cat)
+  const categories = await getCategories()
 
-  const title = hasCategoryFilter
-    ? (() => {
-        const category = filter.cat ? getCategoryBySlug(filter.cat) : undefined
-        if (!category) return 'Приятного аппетита!'
-        if (filter.sub) {
-          const child = category.children.find((item) => item.slug === filter.sub)
-          return child?.title ?? category.title
-        }
-        return category.title
-      })()
-    : 'Приятного аппетита!'
+  let title = 'Приятного аппетита!'
+  if (hasCategoryFilter && filter.cat) {
+    const category = await getCategoryBySlug(filter.cat)
+    if (category) {
+      if (filter.sub) {
+        const child = category.children.find(
+          (item) => item.slug === filter.sub,
+        )
+        title = child?.title ?? category.title
+      } else {
+        title = category.title
+      }
+    }
+  }
 
-  const filteredRecipes = hasCategoryFilter && filter.cat
-    ? getRecipesByCategory(filter.cat, filter.sub).map(toRecipeCardProps)
-    : []
+  const filteredRecipes =
+    hasCategoryFilter && filter.cat
+      ? getRecipesByCategory(filter.cat, filter.sub).map((recipe) =>
+          toRecipeCardProps(recipe, categories),
+        )
+      : []
 
-  const newRecipes = getNewRecipes().map(toRecipeCardProps)
-  const juicyRecipes = getJuicyRecipes(4).map(toRecipeCardProps)
+  const newRecipes = getNewRecipes().map((recipe) =>
+    toRecipeCardProps(recipe, categories),
+  )
+  const juicyRecipes = getJuicyRecipes(4).map((recipe) =>
+    toRecipeCardProps(recipe, categories),
+  )
   const authors = getAuthors().map(toAuthorCardProps)
-  const veganFeatured = getVeganFeaturedRecipes().map(toRecipeCardProps)
-  const veganQuick = getVeganQuickRecipes().map(toRecipeActionCardProps)
+  const veganFeatured = getVeganFeaturedRecipes().map((recipe) =>
+    toRecipeCardProps(recipe, categories),
+  )
+  const veganQuick = getVeganQuickRecipes().map((recipe) =>
+    toRecipeActionCardProps(recipe, categories),
+  )
 
   return (
     <div className="mx-auto flex w-full min-w-0 max-w-[1360px] flex-col items-stretch gap-8 pt-4 lg:pt-8">
@@ -63,9 +79,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       </div>
 
       {hasCategoryFilter ? (
-        <ul
-          className="grid w-full grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 xl:grid-cols-2"
-        >
+        <ul className="grid w-full grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 xl:grid-cols-2">
           {filteredRecipes.map((recipe) => (
             <li key={recipe.href} className="min-w-0">
               <RecipeCard {...recipe} variant="horizontal" />

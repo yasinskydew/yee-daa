@@ -4,6 +4,7 @@ import { RECIPES } from '@/app/data/recipes'
 import {
   getCategories as loadCategories,
   getCategoryBySlug,
+  findCategoryByAnySlug,
 } from '@/app/data/categories'
 
 export function getRecipes(): Recipe[] {
@@ -14,11 +15,11 @@ export function getRecipeById(id: string): Recipe | undefined {
   return RECIPES.find((recipe) => recipe.id === id)
 }
 
-export function getCategories(): Category[] {
+export async function getCategories(): Promise<Category[]> {
   return loadCategories()
 }
 
-export { getCategoryBySlug }
+export { getCategoryBySlug, findCategoryByAnySlug }
 
 export function getAuthors(): Author[] {
   return AUTHORS

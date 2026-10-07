@@ -1,9 +1,12 @@
 import { RecipeCard } from '@/app/ui/composites/recipe-card'
-import { getJuicyRecipes } from '@/app/data/api'
+import { getCategories, getJuicyRecipes } from '@/app/data/api'
 import { toRecipeCardProps } from '@/app/data/mappers'
 
-export default function JuicyPage() {
-  const recipes = getJuicyRecipes().map(toRecipeCardProps)
+export default async function JuicyPage() {
+  const categories = await getCategories()
+  const recipes = getJuicyRecipes().map((recipe) =>
+    toRecipeCardProps(recipe, categories),
+  )
 
   return (
     <div className="mx-auto flex w-full min-w-0 max-w-[1360px] flex-col gap-6 pt-4 lg:gap-8 lg:pt-8">
@@ -11,9 +14,7 @@ export default function JuicyPage() {
         Самое сочное
       </h1>
 
-      <ul
-        className="grid w-full grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-1 lg:gap-6 xl:grid-cols-2"
-      >
+      <ul className="grid w-full grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-1 lg:gap-6 xl:grid-cols-2">
         {recipes.map((recipe) => (
           <li key={recipe.href} className="min-w-0">
             <RecipeCard {...recipe} variant="horizontal" />

@@ -1,19 +1,23 @@
 import type { Author, Category, Recipe } from '@/app/data/types'
-import { getCategoryBySlug } from '@/app/data/categories'
 import type { CategoryIconName } from '@/app/ui/icons'
 import type { RecipeCardProps } from '@/app/ui/composites/recipe-card'
 import type { RecipeActionCardProps } from '@/app/ui/composites/recipe-action-card'
 import type { AuthorCardProps } from '@/app/ui/composites/author-card'
+import { findCategoryInList } from '@/app/data/category-helpers'
 
-function resolveCategory(recipe: Recipe): Category | undefined {
+function resolveCategory(
+  recipe: Recipe,
+  categories: Category[],
+): Category | undefined {
   const slug = recipe.displayCategorySlug ?? recipe.categorySlug
-  return getCategoryBySlug(slug)
+  return findCategoryInList(categories, slug)
 }
 
 export function toRecipeCardProps(
   recipe: Recipe,
+  categories: Category[] = [],
 ): Omit<RecipeCardProps, 'variant' | 'className'> {
-  const category = resolveCategory(recipe)
+  const category = resolveCategory(recipe, categories)
 
   return {
     title: recipe.title,
@@ -30,8 +34,9 @@ export function toRecipeCardProps(
 
 export function toRecipeActionCardProps(
   recipe: Recipe,
+  categories: Category[] = [],
 ): RecipeActionCardProps {
-  const category = resolveCategory(recipe)
+  const category = resolveCategory(recipe, categories)
 
   return {
     title: recipe.title,

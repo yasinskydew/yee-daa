@@ -5,7 +5,8 @@ import {
   Breadcrumbs,
   type BreadcrumbItem,
 } from '@/app/ui/primitives/breadcrumbs'
-import { getCategoryBySlug } from '@/app/data/categories'
+import { findCategoryInList } from '@/app/data/category-helpers'
+import type { Category } from '@/app/data/types'
 
 const PAGE_LABELS: Record<string, string> = {
   home: 'Главная',
@@ -19,16 +20,21 @@ const PAGE_LABELS: Record<string, string> = {
 }
 
 interface BreadcrumbsNavProps {
+  categories: Category[]
   className?: string
 }
 
-function homeCategoryCrumbs(cat: string | null, sub: string | null): BreadcrumbItem[] {
+function homeCategoryCrumbs(
+  categories: Category[],
+  cat: string | null,
+  sub: string | null,
+): BreadcrumbItem[] {
   const items: BreadcrumbItem[] = [{ label: 'Главная', href: '/home' }]
   if (!cat) {
     return [{ label: 'Главная' }]
   }
 
-  const category = getCategoryBySlug(cat)
+  const category = findCategoryInList(categories, cat)
   if (!category) return items
 
   const child = sub
@@ -47,7 +53,7 @@ function homeCategoryCrumbs(cat: string | null, sub: string | null): BreadcrumbI
   return items
 }
 
-export function BreadcrumbsNav({ className }: BreadcrumbsNavProps) {
+export function BreadcrumbsNav({ categories, className }: BreadcrumbsNavProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const parts = pathname.split('/').filter(Boolean)
@@ -55,7 +61,11 @@ export function BreadcrumbsNav({ className }: BreadcrumbsNavProps) {
 
   const items: BreadcrumbItem[] =
     root === 'home'
-      ? homeCategoryCrumbs(searchParams.get('cat'), searchParams.get('sub'))
+      ? homeCategoryCrumbs(
+          categories,
+          searchParams.get('cat'),
+          searchParams.get('sub'),
+        )
       : parts.map((part, i) => {
           const href = '/' + parts.slice(0, i + 1).join('/')
           const isLast = i === parts.length - 1

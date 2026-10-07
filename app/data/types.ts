@@ -1,14 +1,20 @@
 import type { CategoryIconName } from '@/app/ui/icons'
 
+/** Matches SubCategoryResponse from GET /api/v1/categories */
 export interface CategoryChild {
+  id: string
   slug: string
   title: string
+  sort_order: number
 }
 
+/** Matches CategoryResponse; icon narrowed to known UI icons */
 export interface Category {
+  id: string
   slug: string
   title: string
   icon: CategoryIconName
+  sort_order: number
   children: CategoryChild[]
 }
 
