@@ -1,4 +1,4 @@
-import { getRecipeById } from '@/app/data/api'
+import { getCategories, getRecipeById } from '@/app/data/api'
 
 interface RecipePageProps {
   params: Promise<{ id: string }>
@@ -6,7 +6,10 @@ interface RecipePageProps {
 
 export default async function RecipePage({ params }: RecipePageProps) {
   const { id } = await params
-  const recipe = getRecipeById(id)
+  const [recipe] = await Promise.all([
+    getRecipeById(id),
+    getCategories(),
+  ])
 
   return (
     <main className="pt-4 lg:pt-8">

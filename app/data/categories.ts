@@ -60,7 +60,9 @@ function mapCategory(dto: CategoryDto): Category {
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const data = await apiFetch<CategoryDto[]>('/categories')
+  const data = await apiFetch<CategoryDto[]>('/categories', {
+    tags: ['categories'],
+  })
   if (!data) return []
   return data.map(mapCategory)
 }
@@ -71,6 +73,7 @@ export async function getCategoryBySlug(
   // 404 → apiFetch returns null ({ detail: string } from NotFoundError)
   const data = await apiFetch<CategoryDto>(
     `/categories/${encodeURIComponent(slug)}`,
+    { tags: ['categories'] },
   )
   if (!data) return undefined
   return mapCategory(data)

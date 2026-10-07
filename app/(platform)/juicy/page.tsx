@@ -3,8 +3,11 @@ import { getCategories, getJuicyRecipes } from '@/app/data/api'
 import { toRecipeCardProps } from '@/app/data/mappers'
 
 export default async function JuicyPage() {
-  const categories = await getCategories()
-  const recipes = getJuicyRecipes().map((recipe) =>
+  const [categories, recipesList] = await Promise.all([
+    getCategories(),
+    getJuicyRecipes(),
+  ])
+  const recipes = recipesList.map((recipe) =>
     toRecipeCardProps(recipe, categories),
   )
 

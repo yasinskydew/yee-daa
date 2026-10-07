@@ -1,283 +1,159 @@
-import type { Recipe } from '@/app/data/types'
+import 'server-only'
 
-export const RECIPES: Recipe[] = [
-  {
-    id: '1',
-    title: 'Солянка с грибами',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'first-courses',
-    subcategorySlug: 'vegetable-soups',
-    likes: 1,
-    imageSrc: '/dishes/solyanka.png',
-    isNew: true,
-    isJuicy: false,
-    createdAt: '2024-12-01T10:00:00.000Z',
-  },
-  {
-    id: '2',
-    title: 'Капустные котлеты',
-    description:
-      'Капустные котлеты по этому рецепту получаются необычайно пышными и невероятно вкусными. Мягкий вкус и лёгкая пряная нотка наверняка помогут сделать эти чудесные котлеты из капусты одним из ваших любимых овощных блюд.',
-    categorySlug: 'vegan',
-    subcategorySlug: 'vegan-mains',
-    likes: 2,
-    imageSrc: '/dishes/cabbage-cutlets.png',
-    isNew: true,
-    isJuicy: false,
-    createdAt: '2024-12-02T10:00:00.000Z',
-  },
-  {
-    id: '3',
-    title: 'Оладьи на кефире «Пышные»',
-    description:
-      'Очень вкусные и нежные оладьи на кефире. Настоятельно рекомендую пышные кефирные оладьи на завтрак.',
-    categorySlug: 'desserts',
-    subcategorySlug: 'pancakes',
-    likes: 1,
-    imageSrc: '/dishes/oladi.png',
-    isNew: true,
-    isJuicy: false,
-    createdAt: '2024-12-03T10:00:00.000Z',
-  },
-  {
-    id: '4',
-    title: 'Салат «Здоровье»',
-    description:
-      'Сельдерей очень полезен для здоровья, пора набираться витаминов. Не салат, а сплошное удовольствие:) Вкусный, необычный, а главное быстрый.',
-    categorySlug: 'salads',
-    subcategorySlug: 'vegetable-salads',
-    likes: 0,
-    imageSrc: '/dishes/salad-health.png',
-    isNew: true,
-    isJuicy: false,
-    createdAt: '2024-12-04T10:00:00.000Z',
-  },
-  {
-    id: '5',
-    title: 'Кнели со спагетти',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'main-courses',
-    subcategorySlug: 'pasta',
-    likes: 4,
-    imageSrc: '/dishes/spagetti.png',
-    isNew: true,
-    isJuicy: false,
-    createdAt: '2024-12-05T10:00:00.000Z',
-  },
-  {
-    id: '6',
-    title: 'Томатный суп с базиликом',
-    description:
-      'Лёгкий суп на овощном бульоне: спелые томаты, свежий базилик и капля оливкового масла. Идеально на ужин.',
-    categorySlug: 'first-courses',
-    subcategorySlug: 'cream-soups',
-    likes: 3,
-    imageSrc: '/dishes/solyanka.png',
-    isNew: true,
-    isJuicy: false,
-    createdAt: '2024-12-06T10:00:00.000Z',
-  },
-  {
-    id: '7',
-    title: 'Греческий салат',
-    description:
-      'Классика средиземноморской кухни: огурцы, помидоры, фета, маслины и орегано. Быстро, сытно и очень свежо.',
-    categorySlug: 'salads',
-    subcategorySlug: 'vegetable-salads',
-    likes: 5,
-    imageSrc: '/dishes/salad-health.png',
-    isNew: true,
-    isJuicy: false,
-    createdAt: '2024-12-07T10:00:00.000Z',
-  },
-  {
-    id: '8',
-    title: 'Банановые панкейки',
-    description:
-      'Пышные панкейки на молоке с бананом — простой завтрак за 15 минут. Подавайте с ягодами или мёдом.',
-    categorySlug: 'desserts',
-    subcategorySlug: 'pancakes',
-    likes: 2,
-    imageSrc: '/dishes/oladi.png',
-    isNew: true,
-    isJuicy: false,
-    createdAt: '2024-12-08T10:00:00.000Z',
-  },
-  {
-    id: '9',
-    title: 'Кнели со спагетти',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'main-courses',
-    subcategorySlug: 'pasta',
-    likes: 85,
-    recommends: 152,
-    imageSrc: '/dishes/kneli.jpg',
-    isNew: false,
-    isJuicy: true,
-    createdAt: '2024-11-01T10:00:00.000Z',
-  },
-  {
-    id: '10',
-    title: 'Пряная ветчина по итальянски',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'main-courses',
-    subcategorySlug: 'meat',
-    likes: 159,
-    recommends: 257,
-    imageSrc: '/dishes/ham.jpg',
-    isNew: false,
-    isJuicy: true,
-    createdAt: '2024-11-02T10:00:00.000Z',
-  },
-  {
-    id: '11',
-    title: 'Лапша с курицей и шафраном',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'main-courses',
-    subcategorySlug: 'poultry',
-    likes: 258,
-    recommends: 342,
-    imageSrc: '/dishes/noodles.jpg',
-    isNew: false,
-    isJuicy: true,
-    createdAt: '2024-11-03T10:00:00.000Z',
-  },
-  {
-    id: '12',
-    title: 'Том-ям с капустой кимчи',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'national',
-    likes: 124,
-    recommends: 370,
-    imageSrc: '/dishes/tomyum.jpg',
-    isNew: false,
-    isJuicy: true,
-    createdAt: '2024-11-04T10:00:00.000Z',
-  },
-  {
-    id: '13',
-    title: 'Кнели со спагетти',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'main-courses',
-    subcategorySlug: 'pasta',
-    likes: 85,
-    imageSrc: '/dishes/kneli.jpg',
-    isNew: false,
-    isJuicy: true,
-    createdAt: '2024-11-05T10:00:00.000Z',
-  },
-  {
-    id: '14',
-    title: 'Пряная ветчина по итальянски',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'main-courses',
-    subcategorySlug: 'meat',
-    likes: 159,
-    imageSrc: '/dishes/ham.jpg',
-    isNew: false,
-    isJuicy: true,
-    createdAt: '2024-11-06T10:00:00.000Z',
-  },
-  {
-    id: '15',
-    title: 'Лапша с курицей и шафраном',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'main-courses',
-    subcategorySlug: 'poultry',
-    likes: 258,
-    imageSrc: '/dishes/noodles.jpg',
-    isNew: false,
-    isJuicy: true,
-    createdAt: '2024-11-07T10:00:00.000Z',
-  },
-  {
-    id: '16',
-    title: 'Том-ям с капустой кимчи',
-    description:
-      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-    categorySlug: 'national',
-    likes: 124,
-    imageSrc: '/dishes/tomyum.jpg',
-    isNew: false,
-    isJuicy: true,
-    createdAt: '2024-11-08T10:00:00.000Z',
-  },
-  {
-    id: '17',
-    title: 'Картошка, тушенная с болгарским перцем и фасолью в томатном соусе',
-    description:
-      'Картошка, тушенная с болгарским перцем, фасолью, морковью и луком, — вариант сытного блюда на каждый день. Фасоль в данном случае заменяет мясо, делая рагу сытным и питательным.',
-    categorySlug: 'vegan',
-    subcategorySlug: 'vegan-mains',
-    displayCategorySlug: 'main-courses',
-    likes: 1,
-    recommends: 1,
-    isNew: false,
-    isJuicy: false,
-    homeSection: 'vegan-featured',
-    createdAt: '2024-10-01T10:00:00.000Z',
-  },
-  {
-    id: '18',
-    title: 'Капустные котлеты',
-    description:
-      'Капустные котлеты по этому рецепту получаются необычайно пышными и невероятно вкусными. Мягкий вкус и лёгкая пряная нотка наверняка помогут сделать эти чудесные котлеты из капусты одним из ваших любимых овощных блюд.',
-    categorySlug: 'vegan',
-    subcategorySlug: 'vegan-mains',
-    displayCategorySlug: 'main-courses',
-    likes: 2,
-    recommends: 1,
-    isNew: false,
-    isJuicy: false,
-    homeSection: 'vegan-featured',
-    createdAt: '2024-10-02T10:00:00.000Z',
-  },
-  {
-    id: '19',
-    title: 'Стейк для вегетарианцев',
-    description: '',
-    categorySlug: 'vegan',
-    subcategorySlug: 'vegan-mains',
-    displayCategorySlug: 'main-courses',
-    likes: 0,
-    isNew: false,
-    isJuicy: false,
-    homeSection: 'vegan-quick',
-    createdAt: '2024-10-03T10:00:00.000Z',
-  },
-  {
-    id: '20',
-    title: 'Котлеты из гречки и фасоли',
-    description: '',
-    categorySlug: 'vegan',
-    subcategorySlug: 'vegan-mains',
-    displayCategorySlug: 'main-courses',
-    likes: 0,
-    isNew: false,
-    isJuicy: false,
-    homeSection: 'vegan-quick',
-    createdAt: '2024-10-04T10:00:00.000Z',
-  },
-  {
-    id: '21',
-    title: 'Сырный суп с лапшой и брокколи',
-    description: '',
-    categorySlug: 'vegan',
-    subcategorySlug: 'vegan-soups',
-    displayCategorySlug: 'first-courses',
-    likes: 0,
-    isNew: false,
-    isJuicy: false,
-    homeSection: 'vegan-quick',
-    createdAt: '2024-10-05T10:00:00.000Z',
-  },
-]
+import { apiFetch } from '@/app/lib/api/client'
+import type { FileResponse } from '@/app/lib/api/file-types'
+import type { HomeSection, Recipe } from '@/app/data/types'
+
+/** Matches RecipeCategoryBrief */
+export interface RecipeCategoryBriefDto {
+  id: string
+  slug: string
+  title: string
+}
+
+/** Matches RecipeSubCategoryBrief */
+export interface RecipeSubCategoryBriefDto {
+  id: string
+  slug: string
+  title: string
+}
+
+/** Wire DTO matching FileResponse nested as cover_file */
+export type FileResponseDto = FileResponse
+
+/** Wire DTO matching RecipeResponse */
+export interface RecipeResponseDto {
+  id: string
+  title: string
+  description: string
+  category: RecipeCategoryBriefDto
+  subcategory: RecipeSubCategoryBriefDto | null
+  cover_file: FileResponseDto | null
+  likes: number
+  recommends: number | null
+  is_new: boolean
+  is_juicy: boolean
+  home_section: HomeSection | null
+  display_category_slug: string | null
+  created_at: string
+  updated_at: string
+}
+
+/** Wire DTO matching RecipeCreate */
+export interface RecipeCreateDto {
+  title: string
+  description?: string
+  category_id: string
+  subcategory_id?: string | null
+  cover_file_id?: string | null
+  likes?: number
+  recommends?: number | null
+  is_new?: boolean
+  is_juicy?: boolean
+  home_section?: HomeSection | null
+  display_category_slug?: string | null
+}
+
+/** Wire DTO matching RecipeUpdate — only sent fields applied; null clears nullable FKs */
+export interface RecipeUpdateDto {
+  title?: string
+  description?: string
+  category_id?: string
+  subcategory_id?: string | null
+  cover_file_id?: string | null
+  likes?: number
+  recommends?: number | null
+  is_new?: boolean
+  is_juicy?: boolean
+  home_section?: HomeSection | null
+  display_category_slug?: string | null
+}
+
+export interface RecipeListParams {
+  category_slug?: string
+  subcategory_slug?: string
+  is_new?: boolean
+  is_juicy?: boolean
+  home_section?: HomeSection
+  limit?: number
+  offset?: number
+}
+
+export function mapRecipeResponse(dto: RecipeResponseDto): Recipe {
+  return {
+    id: String(dto.id),
+    title: dto.title,
+    description: dto.description,
+    imageSrc: dto.cover_file?.url,
+    imageAlt: dto.title,
+    categorySlug: dto.category.slug,
+    subcategorySlug: dto.subcategory?.slug,
+    displayCategorySlug: dto.display_category_slug ?? undefined,
+    likes: dto.likes,
+    recommends: dto.recommends ?? undefined,
+    isNew: dto.is_new,
+    isJuicy: dto.is_juicy,
+    homeSection: dto.home_section ?? undefined,
+    createdAt: dto.created_at,
+  }
+}
+
+const RECIPE_TAGS = ['recipes']
+
+export async function getRecipes(
+  params: RecipeListParams = {},
+): Promise<Recipe[]> {
+  const limit = params.limit ?? 20
+
+  const data = await apiFetch<RecipeResponseDto[]>('/recipes', {
+    tags: RECIPE_TAGS,
+    searchParams: {
+      category_slug: params.category_slug,
+      subcategory_slug: params.subcategory_slug,
+      is_new: params.is_new,
+      is_juicy: params.is_juicy,
+      home_section: params.home_section,
+      limit,
+      offset: params.offset,
+    },
+  })
+
+  if (!data) return []
+  return data.map(mapRecipeResponse)
+}
+
+export async function getRecipeById(id: string): Promise<Recipe | undefined> {
+  const data = await apiFetch<RecipeResponseDto>(
+    `/recipes/${encodeURIComponent(id)}`,
+    { tags: RECIPE_TAGS },
+  )
+  if (!data) return undefined
+  return mapRecipeResponse(data)
+}
+
+export async function getRecipesByCategory(
+  cat: string,
+  sub?: string | null,
+): Promise<Recipe[]> {
+  return getRecipes({
+    category_slug: cat,
+    subcategory_slug: sub ?? undefined,
+    limit: 100,
+  })
+}
+
+export async function getNewRecipes(): Promise<Recipe[]> {
+  return getRecipes({ is_new: true, limit: 20 })
+}
+
+export async function getJuicyRecipes(limit?: number): Promise<Recipe[]> {
+  return getRecipes({ is_juicy: true, limit: limit ?? 100 })
+}
+
+export async function getVeganFeaturedRecipes(): Promise<Recipe[]> {
+  return getRecipes({ home_section: 'vegan-featured', limit: 20 })
+}
+
+export async function getVeganQuickRecipes(): Promise<Recipe[]> {
+  return getRecipes({ home_section: 'vegan-quick', limit: 20 })
+}

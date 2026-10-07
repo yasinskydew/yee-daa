@@ -1,5 +1,8 @@
 import type { CategoryIconName } from '@/app/ui/icons'
 
+/** Matches HomeSection enum from backend */
+export type HomeSection = 'vegan-featured' | 'vegan-quick'
+
 /** Matches SubCategoryResponse from GET /api/v1/categories */
 export interface CategoryChild {
   id: string
@@ -33,7 +36,7 @@ export interface Recipe {
   authorId?: string
   isNew: boolean
   isJuicy: boolean
-  homeSection?: 'vegan-featured' | 'vegan-quick'
+  homeSection?: HomeSection
   /** ISO date — reserved for future sort */
   createdAt: string
 }

@@ -3,7 +3,11 @@ import { NewRecipesSection } from '@/app/ui/composites/new-recipes-section'
 import { JuiciestRecipesSection } from '@/app/ui/composites/juiciest-recipes-section'
 import { CulinaryBlogsSection } from '@/app/ui/composites/culinary-blogs-section'
 import { VeganKitchenSection } from '@/app/ui/composites/vegan-kitchen-section'
-import { RecipeCard } from '@/app/ui/composites/recipe-card'
+import {
+  RecipeCard,
+  type RecipeCardProps,
+} from '@/app/ui/composites/recipe-card'
+import type { RecipeActionCardProps } from '@/app/ui/composites/recipe-action-card'
 import {
   getAuthors,
   getCategories,
@@ -15,6 +19,7 @@ import {
   getVeganQuickRecipes,
 } from '@/app/data/api'
 import { parseCategoryFilter } from '@/app/data/category-helpers'
+import type { Category } from '@/app/data/types'
 import {
   toAuthorCardProps,
   toRecipeActionCardProps,
@@ -25,15 +30,29 @@ interface HomePageProps {
   searchParams: Promise<{ cat?: string; sub?: string }>
 }
 
+type CardProps = Omit<RecipeCardProps, 'variant' | 'className'>
+
 export default async function HomePage({ searchParams }: HomePageProps) {
   const params = await searchParams
   const filter = parseCategoryFilter(params)
   const hasCategoryFilter = Boolean(filter.cat)
-  const categories = await getCategories()
 
   let title = 'Приятного аппетита!'
+  let categories: Category[] = []
+  let filteredRecipes: CardProps[] = []
+  let newRecipes: CardProps[] = []
+  let juicyRecipes: CardProps[] = []
+  let veganFeatured: CardProps[] = []
+  let veganQuick: RecipeActionCardProps[] = []
+
   if (hasCategoryFilter && filter.cat) {
-    const category = await getCategoryBySlug(filter.cat)
+    const [cats, category, filtered] = await Promise.all([
+      getCategories(),
+      getCategoryBySlug(filter.cat),
+      getRecipesByCategory(filter.cat, filter.sub),
+    ])
+    categories = cats
+
     if (category) {
       if (filter.sub) {
         const child = category.children.find(
@@ -44,28 +63,33 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         title = category.title
       }
     }
+
+    filteredRecipes = filtered.map((recipe) =>
+      toRecipeCardProps(recipe, categories),
+    )
+  } else {
+    const [cats, newList, juicyList, veganFeaturedList, veganQuickList] =
+      await Promise.all([
+        getCategories(),
+        getNewRecipes(),
+        getJuicyRecipes(4),
+        getVeganFeaturedRecipes(),
+        getVeganQuickRecipes(),
+      ])
+    categories = cats
+    newRecipes = newList.map((recipe) => toRecipeCardProps(recipe, categories))
+    juicyRecipes = juicyList.map((recipe) =>
+      toRecipeCardProps(recipe, categories),
+    )
+    veganFeatured = veganFeaturedList.map((recipe) =>
+      toRecipeCardProps(recipe, categories),
+    )
+    veganQuick = veganQuickList.map((recipe) =>
+      toRecipeActionCardProps(recipe, categories),
+    )
   }
 
-  const filteredRecipes =
-    hasCategoryFilter && filter.cat
-      ? getRecipesByCategory(filter.cat, filter.sub).map((recipe) =>
-          toRecipeCardProps(recipe, categories),
-        )
-      : []
-
-  const newRecipes = getNewRecipes().map((recipe) =>
-    toRecipeCardProps(recipe, categories),
-  )
-  const juicyRecipes = getJuicyRecipes(4).map((recipe) =>
-    toRecipeCardProps(recipe, categories),
-  )
   const authors = getAuthors().map(toAuthorCardProps)
-  const veganFeatured = getVeganFeaturedRecipes().map((recipe) =>
-    toRecipeCardProps(recipe, categories),
-  )
-  const veganQuick = getVeganQuickRecipes().map((recipe) =>
-    toRecipeActionCardProps(recipe, categories),
-  )
 
   return (
     <div className="mx-auto flex w-full min-w-0 max-w-[1360px] flex-col items-stretch gap-8 pt-4 lg:pt-8">
