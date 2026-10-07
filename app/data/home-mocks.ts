@@ -82,3 +82,86 @@ export const NEW_RECIPES: Omit<RecipeCardProps, 'variant' | 'className'>[] = [
     imageSrc: '/dishes/oladi.png',
   },
 ]
+
+export const JUICY_RECIPES: Omit<RecipeCardProps, 'variant' | 'className'>[] = [
+  {
+    title: 'Кнели со спагетти',
+    description:
+      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+    href: '/recipes/9',
+    categoryLabel: 'Вторые блюда',
+    categoryIcon: 'main-courses',
+    likes: 85,
+    imageSrc: '/dishes/kneli.jpg',
+  },
+  {
+    title: 'Пряная ветчина по итальянски',
+    description:
+      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+    href: '/recipes/10',
+    categoryLabel: 'Вторые блюда',
+    categoryIcon: 'main-courses',
+    likes: 159,
+    imageSrc: '/dishes/ham.jpg',
+  },
+  {
+    title: 'Лапша с курицей и шафраном',
+    description:
+      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+    href: '/recipes/11',
+    categoryLabel: 'Вторые блюда',
+    categoryIcon: 'main-courses',
+    likes: 258,
+    imageSrc: '/dishes/noodles.jpg',
+  },
+  {
+    title: 'Том-ям с капустой кимчи',
+    description:
+      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+    href: '/recipes/12',
+    categoryLabel: 'Национальные',
+    categoryIcon: 'national',
+    likes: 124,
+    imageSrc: '/dishes/tomyum.jpg',
+  },
+  {
+    title: 'Кнели со спагетти',
+    description:
+      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+    href: '/recipes/13',
+    categoryLabel: 'Вторые блюда',
+    categoryIcon: 'main-courses',
+    likes: 85,
+    imageSrc: '/dishes/kneli.jpg',
+  },
+  {
+    title: 'Пряная ветчина по итальянски',
+    description:
+      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+    href: '/recipes/14',
+    categoryLabel: 'Вторые блюда',
+    categoryIcon: 'main-courses',
+    likes: 159,
+    imageSrc: '/dishes/ham.jpg',
+  },
+  {
+    title: 'Лапша с курицей и шафраном',
+    description:
+      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+    href: '/recipes/15',
+    categoryLabel: 'Вторые блюда',
+    categoryIcon: 'main-courses',
+    likes: 258,
+    imageSrc: '/dishes/noodles.jpg',
+  },
+  {
+    title: 'Том-ям с капустой кимчи',
+    description:
+      'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+    href: '/recipes/16',
+    categoryLabel: 'Национальные',
+    categoryIcon: 'national',
+    likes: 124,
+    imageSrc: '/dishes/tomyum.jpg',
+  },
+]

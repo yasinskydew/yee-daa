@@ -1,5 +1,6 @@
 import Search from '@/app/ui/primitives/search'
 import NewRecipesSection from '@/app/ui/composites/new-recipes-section'
+import JuiciestRecipesSection from '@/app/ui/composites/juiciest-recipes-section'
 
 type HomePageProps = {
   searchParams: Promise<{ cat?: string; sub?: string }>
@@ -19,6 +20,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       </div>
 
       <NewRecipesSection />
+      <JuiciestRecipesSection />
     </div>
   )
 }
